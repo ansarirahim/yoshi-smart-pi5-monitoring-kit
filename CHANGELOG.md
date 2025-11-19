@@ -13,13 +13,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Branching strategy defined
 - Architecture diagram created
 
-## [Milestone-1] - TBD
+## [Milestone-1] - 2025-11-19
 
 ### Added
-- RTSP stream handler
-- Frame extraction pipeline
-- OpenCV environment setup
-- Unit tests for RTSP module
+- RTSP stream handler with automatic reconnection logic
+- Frame buffer with thread-safe circular buffer implementation
+- Comprehensive unit tests (27 tests, 100% pass rate)
+- Test coverage: 84% for stream_handler, 97% for frame_buffer
+- LINE Messaging API credentials configured
+- Utility modules: logger and config_loader
+
+### Features
+- Automatic reconnection with exponential backoff
+- Thread-safe frame buffering
+- FPS calculation and stream statistics
+- Credential masking in logs for security
+- Configurable buffer size and reconnection attempts
+
+### Testing
+- 14 tests for FrameBuffer (all passing)
+- 13 tests for RTSPStreamHandler (all passing)
+- Thread safety tests included
+- Mock-based testing for RTSP connections
 
 ## [Milestone-2] - TBD
 
