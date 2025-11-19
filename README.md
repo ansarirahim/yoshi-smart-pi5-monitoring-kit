@@ -118,7 +118,11 @@ See [docs/manual/SETUP.md](docs/manual/SETUP.md) for installation instructions.
 
 Proprietary - Client: Yoshinori Ueda
 
-## Contact
+## Developer Contact
 
-Developer: Abdul Raheem Ansari
+**Abdul Raheem Ansari**
+Email: ansarirahim1@gmail.com
+WhatsApp: +91 9024304883
+LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+GitHub: https://github.com/ansarirahim
 

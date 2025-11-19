@@ -185,5 +185,11 @@ find /home/pi/rpi-monitoring/snapshots/ -mtime +7 -delete
 
 ## Support
 
-For issues or questions, contact: Abdul Raheem Ansari
+For technical support or questions, please contact:
+
+**Developer: Abdul Raheem Ansari**
+Email: ansarirahim1@gmail.com
+WhatsApp: +91 9024304883
+LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+GitHub: https://github.com/ansarirahim
 

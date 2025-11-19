@@ -124,12 +124,18 @@ Please let me know if you have any questions or would like me to explain any par
 
 I'm ready to proceed with Milestone 2 whenever you're ready!
 
-Best regards,  
-Rahim
+Best regards,
+**Abdul Raheem Ansari**
+
+**Contact Information:**
+Email: ansarirahim1@gmail.com
+WhatsApp: +91 9024304883
+LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+GitHub: https://github.com/ansarirahim
 
 ---
 
-**Project Progress:** 11% complete (1/9 milestones)  
-**Budget Used:** $40 / $450  
+**Project Progress:** 11% complete (1/9 milestones)
+**Budget Used:** $40 / $450
 **Time Spent:** 1 day
 
