@@ -1,0 +1,124 @@
+# Raspberry Pi Smart Monitoring Kit
+
+**Client:** Yoshinori Ueda (Japan)  
+**Budget:** $450 Fixed Price  
+**Timeline:** 3-4 weeks  
+**Platform:** Raspberry Pi 4 (4GB)
+
+## Project Overview
+
+An optional Raspberry Pi 4 upgrade kit for Wi-Fi indoor cameras (ImCam Pro / ICSee app) that adds intelligent monitoring capabilities with complete local processing and privacy-first design.
+
+## Key Features
+
+- **Smart Motion/Fall Detection**: OpenCV-based detection (70-80% accuracy target)
+- **LINE Notifications**: Real-time alerts with snapshots via LINE Messaging API
+- **Two-Way Control**: Stop/Resume commands via LINE webhook
+- **OTA Updates**: Automatic updates from GitHub repository
+- **Voice Alerts**: Optional "Are you OK?" voice message on anomaly detection
+- **Pan-Tilt Support**: Maintains existing ICSee app control + optional auto-tracking
+- **Privacy-First**: 100% local processing, no cloud dependency
+
+## Technical Stack
+
+- **Hardware**: Raspberry Pi 4 (4GB), Pan-Tilt servos (SG90/MG90S), PCA9685 servo driver
+- **OS**: Raspberry Pi OS (Debian-based)
+- **Language**: Python 3.9+
+- **Computer Vision**: OpenCV 4.x
+- **Communication**: RTSP, LINE Messaging API, Webhooks
+- **Services**: systemd for auto-start and management
+
+## Project Structure
+
+```
+.
+├── src/                    # Source code
+│   ├── rtsp/              # RTSP stream handling
+│   ├── detection/         # Motion and fall detection
+│   ├── line_api/          # LINE messaging integration
+│   ├── ota/               # OTA update system
+│   ├── voice/             # Voice alert system
+│   ├── pan_tilt/          # Pan-tilt control
+│   └── utils/             # Shared utilities
+├── tests/                 # Unit and integration tests
+├── config/                # Configuration files
+├── scripts/               # Setup and deployment scripts
+├── docs/                  # Documentation
+│   ├── architecture/      # Architecture diagrams
+│   └── manual/            # Setup manual
+├── .github/               # GitHub Actions workflows
+└── requirements.txt       # Python dependencies
+```
+
+## Milestones
+
+### Milestone 1: RTSP & Environment Setup ($40, 3-4 days)
+- Raspberry Pi environment configuration
+- OpenCV installation and optimization
+- RTSP stream integration
+- Frame extraction pipeline
+
+### Milestone 2: Motion Detection Engine ($55, 4-5 days)
+- Background subtraction
+- Motion vector analysis
+- False-positive reduction
+- Event logging and snapshot capture
+
+### Milestone 3: Fall Detection Algorithm ($70, 5-6 days)
+- Body angle estimation
+- Vertical-to-horizontal collapse detection
+- Abnormal inactivity logic
+- Accuracy tuning (70-80% target)
+
+### Milestone 4: LINE Alerts ($45, 2-3 days)
+- LINE Messaging API integration
+- Push notifications with snapshots
+- Message formatting
+
+### Milestone 5: LINE Webhook Commands ($45, 2-3 days)
+- Webhook endpoint implementation
+- Stop/Resume command handling
+- systemd service configuration
+
+### Milestone 6: OTA Update System ($60, 3-4 days)
+- GitHub-based version checking
+- Auto-update script
+- Rollback protection
+- Update logging
+
+### Milestone 7: Voice Alert ($30, 1-2 days)
+- Audio playback system
+- "Are you OK?" trigger
+- Volume control
+
+### Milestone 8: Pan-Tilt Integration ($60, 3-4 days)
+- ICSee app compatibility
+- Python-based PT control
+- Centroid tracking
+- Smooth movement control
+
+### Milestone 9: Final Delivery ($45, 3-4 days)
+- SD card image (.img)
+- English setup manual
+- Test report (elderly/pet/baby scenarios)
+
+## Development Workflow
+
+1. Each milestone has its own branch from `main`
+2. Feature development with unit tests
+3. CI/CD pipeline runs tests automatically
+4. Code review and merge to `main`
+5. Tagged releases for each milestone
+
+## Getting Started
+
+See [docs/manual/SETUP.md](docs/manual/SETUP.md) for installation instructions.
+
+## License
+
+Proprietary - Client: Yoshinori Ueda
+
+## Contact
+
+Developer: Abdul Raheem Ansari
+

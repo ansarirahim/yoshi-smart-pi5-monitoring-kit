@@ -1,0 +1,51 @@
+# Core dependencies for Raspberry Pi Smart Monitoring Kit
+
+# Computer Vision
+opencv-python==4.8.1.78
+numpy==1.24.3
+imutils==0.5.4
+
+# RTSP and Video Processing
+av==11.0.0
+
+# LINE Messaging API
+line-bot-sdk==3.5.0
+
+# Web Framework for Webhook
+flask==3.0.0
+gunicorn==21.2.0
+
+# HTTP Requests
+requests==2.31.0
+
+# Configuration Management
+python-dotenv==1.0.0
+pyyaml==6.0.1
+
+# GPIO and Servo Control (Raspberry Pi specific)
+RPi.GPIO==0.7.1
+adafruit-circuitpython-pca9685==3.4.8
+adafruit-circuitpython-servokit==1.3.13
+
+# Audio Playback
+pygame==2.5.2
+
+# System Utilities
+psutil==5.9.6
+
+# Logging
+colorlog==6.8.0
+
+# Testing
+pytest==7.4.3
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+
+# Code Quality
+pylint==3.0.3
+black==23.12.1
+flake8==6.1.0
+
+# Type Checking
+mypy==1.7.1
+

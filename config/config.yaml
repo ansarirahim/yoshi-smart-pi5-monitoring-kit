@@ -1,0 +1,110 @@
+# Raspberry Pi Smart Monitoring Kit Configuration
+
+# Camera Settings
+camera:
+  rtsp_url: "rtsp://192.168.1.100:554/stream"  # Update with actual camera RTSP URL
+  username: "admin"
+  password: "password"
+  reconnect_attempts: 5
+  reconnect_delay: 5  # seconds
+  frame_width: 640
+  frame_height: 480
+  fps: 15
+
+# Motion Detection Settings
+motion_detection:
+  enabled: true
+  sensitivity: 0.5  # 0.0 to 1.0
+  min_area: 500  # minimum contour area in pixels
+  blur_kernel_size: 21
+  threshold_value: 25
+  dilation_iterations: 2
+  cooldown_period: 5  # seconds between detections
+
+# Fall Detection Settings
+fall_detection:
+  enabled: true
+  sensitivity: 0.7  # 0.0 to 1.0
+  aspect_ratio_threshold: 1.5  # height/width ratio
+  vertical_velocity_threshold: 0.3
+  inactivity_timeout: 10  # seconds
+  min_confidence: 0.7
+
+# LINE Messaging API
+line:
+  channel_access_token: ""  # Set via environment variable or secrets
+  channel_secret: ""  # Set via environment variable or secrets
+  user_id: ""  # Target user ID for notifications
+  send_snapshots: true
+  snapshot_quality: 85  # JPEG quality 0-100
+
+# Webhook Server
+webhook:
+  enabled: true
+  host: "0.0.0.0"
+  port: 5000
+  ssl_enabled: false
+  ssl_cert: ""
+  ssl_key: ""
+
+# OTA Updates
+ota:
+  enabled: true
+  github_repo: "username/repo"  # Update with actual repo
+  branch: "main"
+  check_interval: 3600  # seconds (1 hour)
+  auto_update: true
+  backup_enabled: true
+
+# Voice Alerts
+voice:
+  enabled: true
+  audio_file: "assets/are_you_ok.wav"
+  volume: 0.8  # 0.0 to 1.0
+  trigger_on_fall: true
+  trigger_on_motion: false
+
+# Pan-Tilt Control
+pan_tilt:
+  enabled: true
+  servo_driver: "PCA9685"  # or "GPIO"
+  i2c_address: 0x40
+  pan_channel: 0
+  tilt_channel: 1
+  pan_min: 150
+  pan_max: 600
+  pan_center: 375
+  tilt_min: 150
+  tilt_max: 600
+  tilt_center: 375
+  movement_speed: 0.05  # seconds per degree
+
+# Auto Tracking
+auto_tracking:
+  enabled: false  # Optional feature
+  tracking_mode: "centroid"  # centroid, face, person
+  update_interval: 0.5  # seconds
+  smoothing_factor: 0.3
+  boundary_margin: 50  # pixels from edge before tracking
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  log_file: "logs/monitoring.log"
+  max_file_size: 10485760  # 10 MB
+  backup_count: 5
+  console_output: true
+
+# Storage
+storage:
+  snapshots_dir: "snapshots"
+  max_snapshots: 1000
+  snapshot_retention_days: 7
+  logs_dir: "logs"
+
+# System
+system:
+  timezone: "Asia/Tokyo"
+  startup_delay: 10  # seconds
+  graceful_shutdown_timeout: 30  # seconds
+
