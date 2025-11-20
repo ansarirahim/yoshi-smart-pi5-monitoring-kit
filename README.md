@@ -120,9 +120,9 @@ Proprietary - Client: Yoshinori Ueda
 
 ## Developer Contact
 
-**Abdul Raheem Ansari**
+**A.R. Ansari**
 Email: ansarirahim1@gmail.com
-WhatsApp: +91 9024304883
+WhatsApp: +919024304883
 LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
 GitHub: https://github.com/ansarirahim
 

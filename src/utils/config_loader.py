@@ -1,5 +1,13 @@
 """
-Configuration loader utility
+Configuration loader utility.
+
+Handles loading and managing configuration from YAML files, JSON secrets,
+and environment variables with type-safe access.
+
+Author: A.R. Ansari
+Email: ansarirahim1@gmail.com
+LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+Project: Raspberry Pi Smart Monitoring Kit
 """
 
 import yaml

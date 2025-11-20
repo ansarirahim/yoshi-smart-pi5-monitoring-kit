@@ -187,6 +187,11 @@ See `.env.example` for all available options.
 
 ---
 
-**Last Updated:** November 20, 2025  
+**Developer:** A.R. Ansari
+**Email:** ansarirahim1@gmail.com
+**WhatsApp:** +919024304883
+**LinkedIn:** https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+**Last Updated:** November 20, 2025
 **Status:** Ready for Milestone 2
 

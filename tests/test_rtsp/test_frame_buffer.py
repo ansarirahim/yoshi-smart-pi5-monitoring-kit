@@ -1,5 +1,12 @@
 """
-Unit tests for FrameBuffer
+Unit tests for FrameBuffer.
+
+Comprehensive test suite for frame buffer including thread safety,
+overflow handling, and statistics tracking.
+
+Author: A.R. Ansari
+Email: ansarirahim1@gmail.com
+Project: Raspberry Pi Smart Monitoring Kit
 """
 
 import pytest

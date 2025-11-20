@@ -1,5 +1,11 @@
 """
-Unit tests for ConfigLoader
+Unit tests for ConfigLoader.
+
+Test suite for configuration loading from YAML, JSON, and environment variables.
+
+Author: A.R. Ansari
+Email: ansarirahim1@gmail.com
+Project: Raspberry Pi Smart Monitoring Kit
 """
 
 import pytest

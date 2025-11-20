@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
 """
-Raspberry Pi Smart Monitoring Kit
-Main Application Entry Point
+Raspberry Pi Smart Monitoring Kit - Main Application Entry Point.
 
-Author: Abdul Raheem Ansari
+This is the main orchestrator for the smart monitoring system, coordinating
+all components including stream handling, detection, notifications, and control.
+
+Author: A.R. Ansari
+Email: ansarirahim1@gmail.com
+WhatsApp: +919024304883
+LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
 Client: Yoshinori Ueda
+Project: Raspberry Pi Smart Monitoring Kit
 """
 
 import sys

@@ -1,6 +1,13 @@
 """
-Frame Buffer for RTSP stream
-Thread-safe circular buffer for storing and retrieving frames
+Frame Buffer for video streams.
+
+Thread-safe circular buffer implementation for storing and retrieving
+video frames with automatic overflow handling.
+
+Author: A.R. Ansari
+Email: ansarirahim1@gmail.com
+LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+Project: Raspberry Pi Smart Monitoring Kit
 """
 
 import threading

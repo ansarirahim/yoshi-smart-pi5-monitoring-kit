@@ -243,8 +243,9 @@ http://CAMERA_IP/image/jpeg.cgi
 
 ---
 
-**Developer:** Abdul Raheem Ansari  
-**Email:** ansarirahim1@gmail.com  
-**WhatsApp:** +91 9024304883  
+**Developer:** A.R. Ansari
+**Email:** ansarirahim1@gmail.com
+**WhatsApp:** +919024304883
+**LinkedIn:** https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
 **Date:** November 20, 2025
 

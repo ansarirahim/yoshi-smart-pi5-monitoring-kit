@@ -1,6 +1,13 @@
 """
-RTSP Stream Handler with automatic reconnection
-Handles video stream connection, frame extraction, and error recovery
+RTSP Stream Handler with automatic reconnection.
+
+This module handles video stream connection, frame extraction, and error recovery
+for RTSP, MJPEG, and HTTP snapshot streams.
+
+Author: A.R. Ansari
+Email: ansarirahim1@gmail.com
+LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+Project: Raspberry Pi Smart Monitoring Kit
 """
 
 import cv2

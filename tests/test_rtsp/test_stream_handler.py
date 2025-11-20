@@ -1,5 +1,12 @@
 """
-Unit tests for RTSPStreamHandler
+Unit tests for RTSPStreamHandler.
+
+Comprehensive test suite for RTSP stream handler including connection,
+reconnection, frame reading, and thread safety tests.
+
+Author: A.R. Ansari
+Email: ansarirahim1@gmail.com
+Project: Raspberry Pi Smart Monitoring Kit
 """
 
 import pytest
