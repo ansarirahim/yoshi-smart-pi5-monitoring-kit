@@ -44,6 +44,7 @@ htmlcov/
 logs/
 
 # Configuration (sensitive)
+.env
 config/secrets.json
 config/line_credentials.json
 *.key
