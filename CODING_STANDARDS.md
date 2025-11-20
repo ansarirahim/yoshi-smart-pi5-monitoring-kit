@@ -224,8 +224,89 @@ Added configurable max retry attempts and delay parameters.
 Closes #123
 ```
 
+## Documentation Standards
+
+### Sphinx Documentation
+
+This project uses **Sphinx** for API documentation generation (industry standard for Python).
+
+**Build documentation:**
+```bash
+cd docs
+make html
+```
+
+**View documentation:**
+```bash
+open _build/html/index.html
+```
+
+### Docstring Format
+
+Use **Google-style docstrings** (compatible with Sphinx Napoleon extension):
+
+```python
+def process_frame(frame: np.ndarray, threshold: float = 0.5) -> Dict[str, Any]:
+    """
+    Process video frame for motion detection.
+
+    This function applies background subtraction and contour detection
+    to identify motion in the frame.
+
+    Args:
+        frame: Input video frame as numpy array (H, W, C)
+        threshold: Detection sensitivity threshold (0.0 to 1.0)
+
+    Returns:
+        Dictionary containing:
+            - motion_detected (bool): Whether motion was detected
+            - confidence (float): Detection confidence score
+            - bounding_boxes (List[Tuple]): List of (x, y, w, h) boxes
+
+    Raises:
+        ValueError: If frame is None or threshold out of range
+        RuntimeError: If OpenCV processing fails
+
+    Example:
+        >>> frame = cv2.imread('test.jpg')
+        >>> result = process_frame(frame, threshold=0.7)
+        >>> print(result['motion_detected'])
+        True
+
+    Note:
+        This function modifies the input frame in-place for performance.
+
+    See Also:
+        :func:`detect_fall`: Fall detection algorithm
+        :class:`MotionDetector`: Main motion detection class
+    """
+    pass
+```
+
+### API Documentation Coverage
+
+- **All public modules** must have module-level docstrings
+- **All public classes** must have class-level docstrings
+- **All public methods/functions** must have complete docstrings
+- **All parameters** must be documented with types
+- **All return values** must be documented
+- **All exceptions** must be documented
+
+### Documentation Build
+
+**Local build:**
+```bash
+pip install -r docs/requirements.txt
+cd docs
+make html
+```
+
+**ReadTheDocs Integration:**
+- Documentation auto-builds on every commit
+- Available at: `https://raspberry-pi-smart-monitoring.readthedocs.io`
+
 ---
 
-**Last Updated:** November 20, 2025  
+**Last Updated:** November 20, 2025
 **Maintained by:** A.R. Ansari
 

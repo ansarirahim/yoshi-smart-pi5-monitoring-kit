@@ -49,3 +49,8 @@ flake8==6.1.0
 # Type Checking
 mypy==1.7.1
 
+# Documentation
+sphinx==7.2.6
+sphinx-rtd-theme==2.0.0
+sphinx-autodoc-typehints==1.25.2
+

@@ -114,6 +114,24 @@ An optional Raspberry Pi 4 upgrade kit for Wi-Fi indoor cameras (ImCam Pro / ICS
 
 See [docs/manual/SETUP.md](docs/manual/SETUP.md) for installation instructions.
 
+## Documentation
+
+**API Documentation:** Built with Sphinx (Python industry standard)
+
+Build documentation locally:
+```bash
+pip install -r docs/requirements.txt
+cd docs
+make html
+open _build/html/index.html
+```
+
+**Documentation includes:**
+- Complete API reference
+- Module documentation
+- Code examples
+- Architecture diagrams
+
 ## License
 
 Proprietary - Client: Yoshinori Ueda
