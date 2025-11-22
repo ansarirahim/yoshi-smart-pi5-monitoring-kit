@@ -10,8 +10,13 @@ LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
 Project: Raspberry Pi Smart Monitoring Kit
 """
 
+from .background_subtractor import BackgroundSubtractor
 from .motion_detector import MotionDetector
-from .fall_detector import FallDetector
+from .event_logger import EventLogger
 
-__all__ = ['MotionDetector', 'FallDetector']
+__all__ = [
+    'BackgroundSubtractor',
+    'MotionDetector',
+    'EventLogger'
+]
 

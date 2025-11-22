@@ -1,0 +1,57 @@
+# Motion Detection Configuration
+# Author: A.R. Ansari
+# Email: ansarirahim1@gmail.com
+# Project: Raspberry Pi Smart Monitoring Kit
+
+motion_detection:
+  # Background subtraction method: "MOG2" or "KNN"
+  method: "MOG2"
+  
+  # Number of frames for background model
+  history: 500
+  
+  # Variance threshold for pixel classification
+  var_threshold: 16
+  
+  # Detect shadows (shadows marked as 127 in mask)
+  detect_shadows: true
+  
+  # Minimum contour area to consider as motion (pixels)
+  min_area: 500
+  
+  # Gaussian blur kernel size (must be odd)
+  blur_size: 21
+  
+  # Binary threshold value (0-255)
+  threshold: 25
+  
+  # Morphological dilation iterations
+  dilate_iterations: 2
+
+event_logging:
+  # Directory for event logs
+  log_dir: "logs/events"
+  
+  # Directory for snapshots
+  snapshot_dir: "logs/snapshots"
+  
+  # Save frame snapshots
+  save_snapshots: true
+  
+  # Maximum events to keep in memory
+  max_events: 1000
+
+# Display settings
+display:
+  # Show motion detection visualization
+  show_visualization: true
+  
+  # Bounding box color (BGR format)
+  box_color: [0, 255, 0]
+  
+  # Box line thickness
+  box_thickness: 2
+  
+  # Display FPS counter
+  show_fps: true
+
