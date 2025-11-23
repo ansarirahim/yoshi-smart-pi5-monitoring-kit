@@ -13,10 +13,13 @@ Project: Raspberry Pi Smart Monitoring Kit
 from .background_subtractor import BackgroundSubtractor
 from .motion_detector import MotionDetector
 from .event_logger import EventLogger
+from .fall_detector import FallDetector, PersonState
 
 __all__ = [
     'BackgroundSubtractor',
     'MotionDetector',
-    'EventLogger'
+    'EventLogger',
+    'FallDetector',
+    'PersonState'
 ]
 

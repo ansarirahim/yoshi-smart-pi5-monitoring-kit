@@ -28,6 +28,22 @@ motion_detection:
   # Morphological dilation iterations
   dilate_iterations: 2
 
+fall_detection:
+  # Aspect ratio threshold (height/width)
+  # Below this value = lying/horizontal position
+  aspect_ratio_threshold: 1.5
+
+  # Minimum vertical velocity to detect fall (0.0-1.0)
+  # Higher = more sensitive to fast movements
+  fall_velocity_threshold: 0.3
+
+  # Inactivity timeout in seconds
+  # Person lying down for this long = fall detected
+  inactivity_timeout: 10.0
+
+  # Minimum contour area to consider as person (pixels)
+  min_person_area: 2000
+
 event_logging:
   # Directory for event logs
   log_dir: "logs/events"
