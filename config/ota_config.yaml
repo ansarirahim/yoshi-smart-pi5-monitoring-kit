@@ -1,0 +1,78 @@
+# OTA Update Configuration
+# Author: A.R. Ansari
+# Email: ansarirahim1@gmail.com
+# LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+# Project: Raspberry Pi Smart Monitoring Kit
+
+# GitHub repository for updates
+# Format: "owner/repository"
+# Example: "ansarirahim/raspberry-pi-smart-monitoring"
+github_repo: "${GITHUB_REPO}"
+
+# GitHub personal access token (optional for public repos)
+# Set via environment variable: GITHUB_TOKEN
+# Required for private repositories
+# github_token is read from environment variable
+
+# Update check interval in seconds
+# Default: 3600 (1 hour)
+# Minimum recommended: 300 (5 minutes)
+check_interval: 3600
+
+# Enable automatic updates
+# If true, updates are applied automatically when available
+# If false, updates must be applied manually
+auto_update: true
+
+# Enable backup before update
+# Highly recommended to keep enabled
+backup_enabled: true
+
+# Backup directory path
+# Default: /tmp/monitoring_backup
+# Change to persistent storage for production
+backup_path: "/tmp/monitoring_backup"
+
+# Maximum number of backups to keep
+# Older backups are automatically deleted
+# Default: 3
+max_backups: 3
+
+# Update download timeout in seconds
+# Default: 30
+download_timeout: 30
+
+# Retry settings for failed downloads
+# Number of retry attempts
+max_retries: 3
+
+# Delay between retries in seconds
+retry_delay: 5
+
+# Enable update notifications
+# Send notifications when updates are available/applied
+notify_on_update: true
+
+# Restart service after update
+# If true, the monitoring service will restart after update
+# Requires systemd service configuration
+restart_after_update: false
+
+# Service name for restart
+# Only used if restart_after_update is true
+service_name: "monitoring"
+
+# Logging configuration
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  level: "INFO"
+  
+  # Log file path
+  file: "logs/ota.log"
+  
+  # Maximum log file size in bytes (10 MB)
+  max_bytes: 10485760
+  
+  # Number of backup log files to keep
+  backup_count: 5
+
