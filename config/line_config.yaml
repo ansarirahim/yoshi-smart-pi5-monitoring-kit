@@ -1,0 +1,32 @@
+# LINE Messaging API Configuration
+# Author: A.R. Ansari
+# Email: ansarirahim1@gmail.com
+# LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+line:
+  # LINE Channel Access Token (set via environment variable)
+  # Get from: https://developers.line.biz/console/
+  channel_access_token: ""  # Set LINE_CHANNEL_ACCESS_TOKEN env var
+  
+  # LINE Channel Secret (set via environment variable)
+  channel_secret: ""  # Set LINE_CHANNEL_SECRET env var
+  
+  # Target LINE User ID
+  # Get by adding bot as friend and checking webhook logs
+  user_id: ""  # Set LINE_USER_ID env var
+  
+  # Snapshot Settings
+  send_snapshots: true  # Attach image snapshots to alerts
+  snapshot_quality: 85  # JPEG quality (0-100)
+  
+  # Retry Settings
+  max_retries: 3  # Maximum retry attempts on failure
+  retry_delay: 2.0  # Delay between retries (seconds)
+  
+  # Alert Settings
+  alert_on_motion: true  # Send alerts for motion detection
+  alert_on_fall: true  # Send alerts for fall detection
+  
+  # Rate Limiting
+  min_alert_interval: 30  # Minimum seconds between alerts (prevent spam)
+

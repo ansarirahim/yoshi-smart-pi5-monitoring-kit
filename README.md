@@ -79,10 +79,13 @@ An optional Raspberry Pi 4 upgrade kit for Wi-Fi indoor cameras (ImCam Pro / ICS
 - ✅ Fall callback system
 - ✅ 21 unit tests (100% pass rate, 97% coverage)
 
-### Milestone 4: LINE Alerts ($45, 2-3 days)
-- LINE Messaging API integration
-- Push notifications with snapshots
-- Message formatting
+### Milestone 4: LINE Alerts ($45, 2-3 days) ✅ COMPLETE
+- ✅ LINE Messaging API v3 integration
+- ✅ Push notifications for motion/fall events
+- ✅ Message formatting with timestamps and metadata
+- ✅ Retry logic with configurable parameters
+- ✅ Statistics tracking (message count, error count)
+- ✅ 18 unit tests (100% pass rate, 93% coverage)
 
 ### Milestone 5: LINE Webhook Commands ($45, 2-3 days)
 - Webhook endpoint implementation
