@@ -87,10 +87,14 @@ An optional Raspberry Pi 4 upgrade kit for Wi-Fi indoor cameras (ImCam Pro / ICS
 - ✅ Statistics tracking (message count, error count)
 - ✅ 18 unit tests (100% pass rate, 93% coverage)
 
-### Milestone 5: LINE Webhook Commands ($45, 2-3 days)
-- Webhook endpoint implementation
-- Stop/Resume command handling
-- systemd service configuration
+### Milestone 5: LINE Webhook Commands ($45, 2-3 days) ✅ COMPLETE
+- ✅ Flask-based webhook server with signature verification
+- ✅ Stop/Resume/Status command handling
+- ✅ Integration with motion and fall detection pause/resume
+- ✅ systemd service configuration for auto-start
+- ✅ Health check endpoint
+- ✅ 21 unit tests (100% pass rate, 94% coverage)
+- ✅ Complete documentation and demo script
 
 ### Milestone 6: OTA Update System ($60, 3-4 days) ✅
 - ✅ GitHub-based version checking

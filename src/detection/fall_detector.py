@@ -29,14 +29,14 @@ class PersonState(Enum):
 class FallDetector:
     """
     Fall detection using aspect ratio analysis and motion patterns.
-    
+
     Detects falls by analyzing:
     - Body aspect ratio (height/width)
     - Vertical-to-horizontal transitions
     - Sudden position changes
     - Prolonged inactivity in horizontal position
     """
-    
+
     def __init__(
         self,
         aspect_ratio_threshold: float = 1.5,
@@ -47,7 +47,7 @@ class FallDetector:
     ):
         """
         Initialize fall detector.
-        
+
         Args:
             aspect_ratio_threshold: Threshold for height/width ratio
                                    (below this = horizontal/lying)
@@ -64,13 +64,13 @@ class FallDetector:
             raise ValueError("inactivity_timeout must be positive")
         if min_person_area <= 0:
             raise ValueError("min_person_area must be positive")
-        
+
         self.aspect_ratio_threshold = aspect_ratio_threshold
         self.fall_velocity_threshold = fall_velocity_threshold
         self.inactivity_timeout = inactivity_timeout
         self.min_person_area = min_person_area
         self.fall_callback = fall_callback
-        
+
         # State tracking
         self.previous_state = PersonState.UNKNOWN
         self.current_state = PersonState.UNKNOWN
@@ -78,73 +78,80 @@ class FallDetector:
         self.state_start_time = None
         self.fall_detected = False
         self.fall_time = None
-        
+
         # Statistics
         self.total_frames = 0
         self.fall_count = 0
-        
+
+        # Control state
+        self.paused = False
+
         # Background subtractor for person detection
         self.bg_subtractor = cv2.createBackgroundSubtractorMOG2(
             history=500,
             varThreshold=16,
             detectShadows=True
         )
-    
+
     def detect(
         self,
         frame: np.ndarray
     ) -> Tuple[bool, PersonState, Optional[Tuple[int, int, int, int]]]:
         """
         Detect fall in frame.
-        
+
         Args:
             frame: Input frame in BGR format
-            
+
         Returns:
             Tuple of (fall_detected, person_state, bounding_box)
             bounding_box is (x, y, w, h) or None if no person detected
         """
         if frame is None or frame.size == 0:
             raise ValueError("Invalid frame: frame is None or empty")
-        
+
+        # If paused, return no fall
+        if self.paused:
+            return False, PersonState.UNKNOWN, None
+
         self.total_frames += 1
-        
+
         # Apply background subtraction
         fg_mask = self.bg_subtractor.apply(frame)
-        
+
         # Remove shadows
         fg_mask[fg_mask == 127] = 0
-        
+
         # Noise reduction
         blurred = cv2.GaussianBlur(fg_mask, (21, 21), 0)
         _, thresh = cv2.threshold(blurred, 25, 255, cv2.THRESH_BINARY)
-        
+
         # Morphological operations
         kernel = np.ones((5, 5), np.uint8)
         dilated = cv2.dilate(thresh, kernel, iterations=3)
-        
+
         # Find contours
         contours, _ = cv2.findContours(
             dilated,
             cv2.RETR_EXTERNAL,
             cv2.CHAIN_APPROX_SIMPLE
         )
-        
+
         # Find largest contour (assume it's the person)
         person_contour = None
         max_area = 0
-        
+
         for contour in contours:
             area = cv2.contourArea(contour)
             if area > max_area and area >= self.min_person_area:
                 max_area = area
                 person_contour = contour
-        
+
         if person_contour is None:
             # No person detected
             self.current_state = PersonState.UNKNOWN
             return False, PersonState.UNKNOWN, None
-        
+
         # Get bounding box
         x, y, w, h = cv2.boundingRect(person_contour)
         bbox = (x, y, w, h)
@@ -329,3 +336,27 @@ class FallDetector:
             detectShadows=True
         )
 
+    def pause(self):
+        """
+        Pause fall detection.
+
+        When paused, detect() will return False without processing frames.
+        """
+        self.paused = True
+
+    def resume(self):
+        """
+        Resume fall detection.
+
+        Resumes normal fall detection after being paused.
+        """
+        self.paused = False
+
+    def is_paused(self) -> bool:
+        """
+        Check if fall detection is paused.
+
+        Returns:
+            True if paused, False otherwise
+        """
+        return self.paused
