@@ -247,3 +247,55 @@ class TestMotionDetector:
         assert motion == True
         assert len(boxes) >= 2  # Should detect both objects
 
+    def test_pause_detection(self):
+        """Test pausing motion detection."""
+        detector = MotionDetector()
+
+        # Create test frame with motion
+        bg = np.zeros((480, 640, 3), dtype=np.uint8)
+        frame = bg.copy()
+        cv2.rectangle(frame, (100, 100), (200, 200), (255, 255, 255), -1)
+
+        # Detect motion normally
+        detector.detect(bg)
+        motion, boxes = detector.detect(frame)
+        assert motion == True
+
+        # Pause detection
+        detector.pause()
+        assert detector.is_paused() == True
+
+        # Should not detect motion when paused
+        motion, boxes = detector.detect(frame)
+        assert motion == False
+        assert len(boxes) == 0
+
+    def test_resume_detection(self):
+        """Test resuming motion detection."""
+        detector = MotionDetector()
+
+        # Create test frame with motion
+        bg = np.zeros((480, 640, 3), dtype=np.uint8)
+        frame = bg.copy()
+        cv2.rectangle(frame, (100, 100), (200, 200), (255, 255, 255), -1)
+
+        # Pause and verify no detection
+        detector.pause()
+        detector.detect(bg)
+        motion, boxes = detector.detect(frame)
+        assert motion == False
+
+        # Resume detection
+        detector.resume()
+        assert detector.is_paused() == False
+
+        # Should detect motion again
+        detector.detect(bg)
+        motion, boxes = detector.detect(frame)
+        assert motion == True
+
+    def test_is_paused_initial_state(self):
+        """Test is_paused returns False initially."""
+        detector = MotionDetector()
+        assert detector.is_paused() == False
+

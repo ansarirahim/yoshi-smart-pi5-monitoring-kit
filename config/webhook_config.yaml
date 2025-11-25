@@ -1,0 +1,37 @@
+# LINE Webhook Server Configuration
+# Author: A.R. Ansari
+# Email: ansarirahim1@gmail.com
+# LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+webhook:
+  # Server Settings
+  host: "0.0.0.0"  # Listen on all interfaces
+  port: 5000  # Webhook server port
+  
+  # Endpoint
+  endpoint: "/webhook"  # Webhook endpoint path
+  
+  # Security
+  verify_signature: true  # Always verify LINE signature
+  
+  # Logging
+  log_requests: true  # Log all incoming webhook requests
+  log_level: "INFO"  # Logging level (DEBUG, INFO, WARNING, ERROR)
+  
+  # Commands
+  allowed_commands:
+    - "stop"
+    - "resume"
+    - "status"
+  
+  # Response Messages
+  messages:
+    stop: "Detection stopped. Send 'resume' to restart."
+    resume: "Detection resumed."
+    status: "System is running."
+    unknown: |
+      Unknown command. Available commands:
+      - stop: Stop detection
+      - resume: Resume detection
+      - status: Check system status
+

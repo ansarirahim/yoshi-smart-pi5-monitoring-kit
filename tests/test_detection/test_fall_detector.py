@@ -352,3 +352,56 @@ class TestFallDetector:
         fall, state, bbox = detector.detect(frame2)
         assert state == PersonState.LYING
 
+    def test_pause_detection(self):
+        """Test pausing fall detection."""
+        detector = FallDetector()
+
+        # Create test frame with person
+        bg = np.zeros((480, 640, 3), dtype=np.uint8)
+        frame = bg.copy()
+        cv2.rectangle(frame, (250, 100), (350, 400), (255, 255, 255), -1)
+
+        # Detect normally
+        detector.detect(bg)
+        fall, state, bbox = detector.detect(frame)
+        assert state != PersonState.UNKNOWN
+
+        # Pause detection
+        detector.pause()
+        assert detector.is_paused() == True
+
+        # Should not detect when paused
+        fall, state, bbox = detector.detect(frame)
+        assert fall == False
+        assert state == PersonState.UNKNOWN
+        assert bbox is None
+
+    def test_resume_detection(self):
+        """Test resuming fall detection."""
+        detector = FallDetector()
+
+        # Create test frame with person
+        bg = np.zeros((480, 640, 3), dtype=np.uint8)
+        frame = bg.copy()
+        cv2.rectangle(frame, (250, 100), (350, 400), (255, 255, 255), -1)
+
+        # Pause and verify no detection
+        detector.pause()
+        detector.detect(bg)
+        fall, state, bbox = detector.detect(frame)
+        assert state == PersonState.UNKNOWN
+
+        # Resume detection
+        detector.resume()
+        assert detector.is_paused() == False
+
+        # Should detect again
+        detector.detect(bg)
+        fall, state, bbox = detector.detect(frame)
+        assert state != PersonState.UNKNOWN
+
+    def test_is_paused_initial_state(self):
+        """Test is_paused returns False initially."""
+        detector = FallDetector()
+        assert detector.is_paused() == False
+
