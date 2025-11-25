@@ -59,13 +59,13 @@ def main():
         default=85,
         help="JPEG quality for snapshots (default: 85)"
     )
-    
+
     args = parser.parse_args()
-    
+
     # Get credentials
     token = args.token or os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
     user_id = args.user_id or os.getenv("LINE_USER_ID")
-    
+
     if not token or not user_id:
         print("Error: LINE credentials not provided")
         print("Set environment variables:")
@@ -74,7 +74,7 @@ def main():
         print("\nOr use command line arguments:")
         print("  --token YOUR_TOKEN --user-id YOUR_USER_ID")
         return
-    
+
     print("LINE Messaging Demo")
     print("=" * 50)
     print(f"User ID: {user_id[:10]}...")
@@ -82,14 +82,14 @@ def main():
     print(f"Quality: {args.quality}")
     print(f"Test Mode: {'Yes' if args.test_mode else 'No'}")
     print("=" * 50)
-    
+
     if args.test_mode:
         print("\nTest mode enabled - no messages will be sent")
         print("Simulating message sending...")
         time.sleep(1)
         print("Test complete!")
         return
-    
+
     # Initialize messenger
     print("\nInitializing LINE messenger...")
     messenger = LINEMessenger(
@@ -98,7 +98,7 @@ def main():
         send_snapshots=args.with_snapshot,
         snapshot_quality=args.quality
     )
-    
+
     # Test 1: Simple text alert
     print("\nTest 1: Sending simple motion alert...")
     success = messenger.send_alert("motion")
@@ -106,9 +106,9 @@ def main():
         print("✓ Motion alert sent successfully")
     else:
         print("✗ Failed to send motion alert")
-    
+
     time.sleep(2)
-    
+
     # Test 2: Alert with metadata
     print("\nTest 2: Sending fall alert with metadata...")
     success = messenger.send_alert("fall", metadata={
@@ -119,14 +119,14 @@ def main():
         print("✓ Fall alert sent successfully")
     else:
         print("✗ Failed to send fall alert")
-    
+
     time.sleep(2)
-    
+
     # Test 3: Alert with snapshot (if enabled)
     if args.with_snapshot:
         print("\nTest 3: Sending alert with snapshot...")
         print("Opening webcam...")
-        
+
         cap = cv2.VideoCapture(0)
         if not cap.isOpened():
             print("✗ Failed to open webcam")
@@ -135,24 +135,24 @@ def main():
         else:
             ret, frame = cap.read()
             cap.release()
-            
+
             if not ret:
                 print("✗ Failed to capture frame")
                 print("Creating test image instead...")
                 frame = create_test_image()
             else:
                 print("✓ Frame captured from webcam")
-        
+
         success = messenger.send_alert("motion", frame=frame, metadata={
             "area": 1500,
             "confidence": 0.88
         })
-        
+
         if success:
             print("✓ Alert with snapshot sent successfully")
         else:
             print("✗ Failed to send alert with snapshot")
-    
+
     # Test 4: Plain text message
     print("\nTest 4: Sending plain text message...")
     success = messenger.send_text("Demo completed successfully!")
@@ -160,7 +160,7 @@ def main():
         print("✓ Text message sent successfully")
     else:
         print("✗ Failed to send text message")
-    
+
     # Show statistics
     print("\n" + "=" * 50)
     print("Statistics:")
@@ -170,17 +170,17 @@ def main():
     if stats['last_message_time']:
         print(f"  Last message: {time.time() - stats['last_message_time']:.1f}s ago")
     print("=" * 50)
-    
+
     print("\nDemo complete!")
 
 
 def create_test_image():
     """Create a test image with text."""
     import numpy as np
-    
+
     # Create blank image
     img = np.zeros((480, 640, 3), dtype=np.uint8)
-    
+
     # Add text
     cv2.putText(
         img,
@@ -191,10 +191,9 @@ def create_test_image():
         (255, 255, 255),
         3
     )
-    
+
     return img
 
 
 if __name__ == "__main__":
     main()
-

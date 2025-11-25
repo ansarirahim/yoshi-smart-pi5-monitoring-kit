@@ -17,56 +17,56 @@ from dotenv import load_dotenv
 # Add parent directory to path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from src.line_api import WebhookServer
-from src.detection import MotionDetector, FallDetector
-from src.utils.logger import setup_logger
+from src.line_api import WebhookServer  # noqa: E402
+from src.detection import MotionDetector, FallDetector  # noqa: E402
+from src.utils.logger import setup_logger  # noqa: E402
 
 
 def main():
     """Run webhook demo."""
     # Load environment variables
     load_dotenv()
-    
+
     # Setup logger
     logger = setup_logger("WebhookDemo")
     logger.info("Starting LINE Webhook Demo")
-    
+
     # Get credentials from environment
     channel_access_token = os.getenv("LINE_CHANNEL_ACCESS_TOKEN")
     channel_secret = os.getenv("LINE_CHANNEL_SECRET")
-    
+
     if not channel_access_token or not channel_secret:
         logger.error("Missing LINE credentials in environment variables")
         logger.error("Please set LINE_CHANNEL_ACCESS_TOKEN and LINE_CHANNEL_SECRET")
         return
-    
+
     # Initialize detectors (mock for demo)
     logger.info("Initializing detection system...")
     motion_detector = MotionDetector()
     fall_detector = FallDetector()
-    
+
     # Command handler
     def handle_command(command: str):
         """Handle webhook commands."""
         logger.info(f"Processing command: {command}")
-        
+
         if command == "stop":
             logger.info("Stopping detection...")
             motion_detector.pause()
             fall_detector.pause()
             logger.info("Detection stopped")
-            
+
         elif command == "resume":
             logger.info("Resuming detection...")
             motion_detector.resume()
             fall_detector.resume()
             logger.info("Detection resumed")
-            
+
         elif command == "status":
             motion_status = "paused" if motion_detector.is_paused() else "running"
             fall_status = "paused" if fall_detector.is_paused() else "running"
             logger.info(f"Status - Motion: {motion_status}, Fall: {fall_status}")
-    
+
     # Initialize webhook server
     logger.info("Initializing webhook server...")
     webhook = WebhookServer(
@@ -76,11 +76,11 @@ def main():
         host="0.0.0.0",
         port=5000
     )
-    
+
     # Start server
     logger.info("Starting webhook server on http://0.0.0.0:5000")
     webhook.start()
-    
+
     logger.info("=" * 60)
     logger.info("Webhook server is running!")
     logger.info("=" * 60)
@@ -99,7 +99,7 @@ def main():
     logger.info("")
     logger.info("Press Ctrl+C to stop")
     logger.info("=" * 60)
-    
+
     # Keep running
     try:
         while True:
@@ -112,4 +112,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

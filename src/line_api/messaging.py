@@ -26,10 +26,10 @@ from linebot.v3.messaging import (
 class LINEMessenger:
     """
     LINE Messaging API client.
-    
+
     Sends push notifications with optional image snapshots.
     Handles message formatting and error recovery.
-    
+
     Args:
         channel_access_token: LINE channel access token
         user_id: Target LINE user ID
@@ -37,17 +37,17 @@ class LINEMessenger:
         snapshot_quality: JPEG quality (0-100)
         max_retries: Maximum retry attempts on failure
         retry_delay: Delay between retries in seconds
-    
+
     Example:
         messenger = LINEMessenger(
             channel_access_token="YOUR_TOKEN",
             user_id="USER_ID"
         )
-        
+
         messenger.send_alert("motion", frame)
         messenger.send_alert("fall", frame, {"velocity": 0.5})
     """
-    
+
     def __init__(
         self,
         channel_access_token: str,
@@ -67,7 +67,7 @@ class LINEMessenger:
             raise ValueError("max_retries must be non-negative")
         if retry_delay < 0:
             raise ValueError("retry_delay must be non-negative")
-        
+
         self.channel_access_token = channel_access_token
         self.user_id = user_id
         self.send_snapshots = send_snapshots
@@ -82,7 +82,7 @@ class LINEMessenger:
         self._message_count = 0
         self._error_count = 0
         self._last_message_time = None
-    
+
     def send_alert(
         self,
         event_type: str,
@@ -91,42 +91,42 @@ class LINEMessenger:
     ) -> bool:
         """
         Send alert notification to LINE.
-        
+
         Args:
             event_type: Type of event (motion, fall, etc.)
             frame: Optional image frame to attach
             metadata: Optional metadata dict
-        
+
         Returns:
             True if message sent successfully, False otherwise
         """
         if not event_type:
             raise ValueError("event_type cannot be empty")
-        
+
         try:
             # Format message text
             message_text = self._format_message(event_type, metadata)
-            
+
             # Send text message
             success = self._send_text_message(message_text)
-            
+
             if not success:
                 return False
-            
+
             # Send snapshot if enabled and frame provided
             if self.send_snapshots and frame is not None:
                 self._send_image_message(frame)
-            
+
             self._message_count += 1
             self._last_message_time = time.time()
-            
+
             return True
-            
+
         except Exception as e:
             self._error_count += 1
             print(f"Error sending alert: {e}")
             return False
-    
+
     def _format_message(
         self,
         event_type: str,
@@ -134,19 +134,19 @@ class LINEMessenger:
     ) -> str:
         """Format alert message text."""
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        
+
         lines = [
             f"[ALERT] {event_type.upper()}",
             f"Time: {timestamp}"
         ]
-        
+
         if metadata:
             for key, value in metadata.items():
                 if isinstance(value, float):
                     lines.append(f"{key.capitalize()}: {value:.2f}")
                 else:
                     lines.append(f"{key.capitalize()}: {value}")
-        
+
         return "\n".join(lines)
 
     def _send_text_message(self, text: str) -> bool:
@@ -226,4 +226,3 @@ class LINEMessenger:
         self._message_count = 0
         self._error_count = 0
         self._last_message_time = None
-

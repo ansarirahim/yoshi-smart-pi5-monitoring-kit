@@ -26,14 +26,14 @@ from .version_manager import VersionManager
 class OTAUpdater:
     """
     OTA updater for GitHub-based updates.
-    
+
     Checks for updates from GitHub releases, downloads updates,
     creates backups, and applies updates with rollback support.
-    
+
     Args:
         config: OTA configuration dictionary
         version_manager: VersionManager instance (optional)
-    
+
     Example:
         config = {
             'github_repo': 'username/repo',
@@ -41,11 +41,11 @@ class OTAUpdater:
             'auto_update': True,
             'backup_enabled': True
         }
-        
+
         updater = OTAUpdater(config)
         updater.start()
     """
-    
+
     def __init__(
         self,
         config: Dict[str, Any],
@@ -55,7 +55,7 @@ class OTAUpdater:
         self.config = config
         self.version_manager = version_manager or VersionManager()
         self.logger = logging.getLogger(__name__)
-        
+
         self.github_repo = config.get('github_repo', '')
         self.github_token = os.getenv('GITHUB_TOKEN')
         self.check_interval = config.get('check_interval', 3600)
@@ -63,67 +63,69 @@ class OTAUpdater:
         self.backup_enabled = config.get('backup_enabled', True)
         self.backup_path = Path(config.get('backup_path', '/tmp/monitoring_backup'))
         self.max_backups = config.get('max_backups', 3)
-        
+
         self._running = False
         self._check_thread = None
         self._last_check = None
         self._update_available = False
         self._latest_version = None
         self._latest_release = None
-    
+
     def start(self) -> None:
         """Start background update checker."""
         if self._running:
             self.logger.warning("OTA updater already running")
             return
-        
+
         self._running = True
         self._check_thread = threading.Thread(target=self._check_loop, daemon=True)
         self._check_thread.start()
         self.logger.info("OTA updater started")
-    
+
     def stop(self) -> None:
         """Stop background update checker."""
         self._running = False
         if self._check_thread:
             self._check_thread.join(timeout=5)
         self.logger.info("OTA updater stopped")
-    
+
     def _check_loop(self) -> None:
         """Background loop for checking updates."""
         while self._running:
             try:
                 self.check_for_updates()
-                
+
                 if self._update_available and self.auto_update:
-                    self.logger.info(f"Auto-update enabled, applying update to {self._latest_version}")
+                    msg = "Auto-update enabled, applying update to "
+                    msg += f"{self._latest_version}"
+                    self.logger.info(msg)
                     self.apply_update()
-                
+
             except Exception as e:
                 self.logger.error(f"Error in update check loop: {e}")
-            
+
             time.sleep(self.check_interval)
-    
+
     def check_for_updates(self) -> bool:
         """
         Check for available updates from GitHub.
-        
+
         Returns:
             True if update is available, False otherwise
         """
         try:
             current_version = self.version_manager.get_current_version()
             self.logger.info(f"Checking for updates (current: {current_version})")
-            
+
             release = self._get_latest_release()
-            
+
             if not release:
                 self.logger.warning("No releases found")
                 self._last_check = datetime.now()
                 return False
-            
+
             latest_version = release['tag_name'].lstrip('v')
-            
+
             if self.version_manager.is_newer(latest_version, current_version):
                 self.logger.info(f"Update available: {latest_version}")
                 self._update_available = True
@@ -136,7 +138,7 @@ class OTAUpdater:
                 self._update_available = False
                 self._last_check = datetime.now()
                 return False
-                
+
         except Exception as e:
             self.logger.error(f"Error checking for updates: {e}")
             return False
@@ -374,4 +376,3 @@ class OTAUpdater:
             'auto_update': self.auto_update,
             'running': self._running
         }
-

@@ -14,4 +14,3 @@ from .updater import OTAUpdater
 from .version_manager import VersionManager
 
 __all__ = ['OTAUpdater', 'VersionManager']
-
