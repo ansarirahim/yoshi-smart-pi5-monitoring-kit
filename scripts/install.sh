@@ -51,10 +51,16 @@ echo "Enabling I2C..."
 sudo raspi-config nonint do_i2c 0
 
 # Create project directory
-PROJECT_DIR="/home/pi/rpi-monitoring"
+CURRENT_USER=$(whoami)
+PROJECT_DIR="/home/${CURRENT_USER}/raspberry-pi-smart-monitoring"
 echo "Creating project directory: $PROJECT_DIR"
 mkdir -p $PROJECT_DIR
-cd $PROJECT_DIR
+
+# If not already in project directory, navigate to it
+if [ "$(pwd)" != "$PROJECT_DIR" ]; then
+    echo "Note: Run this script from the project directory"
+    echo "Current directory: $(pwd)"
+fi
 
 # Install Python dependencies
 echo "Installing Python dependencies..."
@@ -88,7 +94,7 @@ After=network.target
 
 [Service]
 Type=simple
-User=pi
+User=$CURRENT_USER
 WorkingDirectory=$PROJECT_DIR
 ExecStart=/usr/bin/python3 $PROJECT_DIR/main.py
 Restart=always
