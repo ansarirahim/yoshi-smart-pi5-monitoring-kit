@@ -1,3 +1,33 @@
+# =============================================================================
+# Yoshi Smart Monitoring Kit - Systemd Service Configuration
+# =============================================================================
+#
+# @file       yoshi-monitor.service
+# @brief      Systemd service for auto-starting the monitoring system.
+#
+# @author     A.R. Ansari
+# @email      ansarirahim1@gmail.com
+# @phone      +91 9024304881
+# @linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+#
+# @project    Raspberry Pi Smart Monitoring Kit
+# @client     Yoshinori Ueda
+# @version    1.0.0
+# @date       2024-12-04
+# @copyright  (c) 2024 A.R. Ansari. All rights reserved.
+#
+# Installation:
+#   sudo cp yoshi-monitor.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable yoshi-monitor
+#   sudo systemctl start yoshi-monitor
+#
+# Commands:
+#   sudo systemctl status yoshi-monitor   - Check status
+#   sudo systemctl restart yoshi-monitor  - Restart service
+#   journalctl -u yoshi-monitor -f        - View logs
+# =============================================================================
+
 [Unit]
 Description=Yoshi Smart Monitoring Kit
 After=network.target

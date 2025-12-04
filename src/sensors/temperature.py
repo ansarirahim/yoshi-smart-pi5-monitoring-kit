@@ -1,13 +1,38 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Temperature and Humidity Sensor Module.
 
-Modbus RTU communication for reading temperature and humidity
-from RS485 sensors (e.g., XY-MD02, SHT20-based sensors).
+@file       temperature.py
+@brief      Modbus RTU communication for RS485 temperature/humidity sensors.
+@details    Provides interface for XY-MD02, SHT20-based sensors using
+            Modbus RTU protocol over RS485. Includes comprehensive
+            hardware diagnostics for troubleshooting connection issues.
 
-Author: A.R. Ansari
-Email: ansarirahim1@gmail.com
-LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
-Project: Raspberry Pi Smart Monitoring Kit
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
+
+@hardware   XY-MD02 Temperature/Humidity Sensor
+@interface  USB-RS485 Converter (CH340/CP210x)
+@protocol   Modbus RTU (Function Code 0x04 - Read Input Registers)
+
+@dependencies
+    - pyserial >= 3.5
+
+@usage
+    >>> from src.sensors.temperature import TemperatureSensor
+    >>> sensor = TemperatureSensor(port="/dev/ttyUSB0")
+    >>> sensor.connect()
+    >>> reading = sensor.read()
+    >>> print(f"Temperature: {reading.temperature}°C")
 """
 
 import time

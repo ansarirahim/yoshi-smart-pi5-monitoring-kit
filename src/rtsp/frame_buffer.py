@@ -1,13 +1,23 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Frame Buffer for video streams.
 
-Thread-safe circular buffer implementation for storing and retrieving
-video frames with automatic overflow handling.
+@file       frame_buffer.py
+@brief      Thread-safe circular buffer for video frames.
+@details    Provides thread-safe storage and retrieval of video frames
+            with automatic overflow handling.
 
-Author: A.R. Ansari
-Email: ansarirahim1@gmail.com
-LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
-Project: Raspberry Pi Smart Monitoring Kit
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
 """
 
 import threading

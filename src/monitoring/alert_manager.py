@@ -1,16 +1,26 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Alert Manager - LINE Notification Integration for Raspberry Pi Smart Monitoring Kit.
 
-Manages alert notifications via LINE Messaging API:
-- Sends sensor event alerts
-- Formats messages with emoji and status
-- Rate limiting to prevent spam
-- Alert history tracking
+@file       alert_manager.py
+@brief      Manages alert notifications via LINE Messaging API.
+@details    Provides notification management including:
+            - Sends sensor event alerts
+            - Formats messages with emoji and status
+            - Rate limiting to prevent spam
+            - Alert history tracking
 
-Author: A.R. Ansari
-Project: Raspberry Pi Smart Monitoring Kit
-Client: Yoshinori Ueda
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
 """
 
 from dataclasses import dataclass

@@ -1,20 +1,30 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Main Monitoring Script - Raspberry Pi Smart Monitoring Kit.
 
-Runs the unified sensor monitoring system with:
-- All 5 sensors (PIR, Sound, Door, Vibration, Temperature)
-- Pattern detection and anomaly alerts
-- LINE notifications
-- Webhook command support
-- OTA update support
+@file       monitor.py
+@brief      Unified sensor monitoring system with pattern detection.
+@details    Runs the complete monitoring system integrating:
+            - All 5 sensors (PIR, Sound, Door, Vibration, Temperature)
+            - Pattern detection and anomaly alerts
+            - LINE notifications
+            - Webhook command support
+            - OTA update support
 
-Usage:
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
+
+@usage
     python3 -m src.monitoring.monitor
-
-Author: A.R. Ansari
-Project: Raspberry Pi Smart Monitoring Kit
-Client: Yoshinori Ueda
 """
 
 import os

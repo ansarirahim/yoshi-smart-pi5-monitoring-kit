@@ -1,13 +1,26 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Voice Alert Player for audio notifications.
 
-Handles audio playback for voice alerts and emergency notifications
-using pygame mixer.
+@file       alert_player.py
+@brief      Handles audio playback for voice alerts.
+@details    Plays audio alerts for fall detection and emergency
+            notifications using pygame mixer.
 
-Author: A.R. Ansari
-Email: ansarirahim1@gmail.com
-LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
-Project: Raspberry Pi Smart Monitoring Kit
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
+
+@dependencies
+    - pygame >= 2.0.0
 """
 
 import os

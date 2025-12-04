@@ -1,13 +1,26 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Fall Detection Module.
 
-Detects falls using pose estimation and body angle analysis.
-Identifies vertical-to-horizontal collapse patterns and abnormal inactivity.
+@file       fall_detector.py
+@brief      Detects falls using pose estimation and body analysis.
+@details    Identifies vertical-to-horizontal collapse patterns
+            and abnormal inactivity using aspect ratio analysis.
 
-Author: A.R. Ansari
-Email: ansarirahim1@gmail.com
-LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
-Project: Raspberry Pi Smart Monitoring Kit
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
+
+@dependencies
+    - opencv-python >= 4.5.0
 """
 
 import cv2

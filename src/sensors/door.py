@@ -1,11 +1,29 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 MC-38 Magnetic Door/Window Sensor Module for Raspberry Pi.
 
-This module provides an interface for the MC-38 wired magnetic reed switch.
-The sensor detects door/window open/close states using a magnet and reed switch.
+@file       door.py
+@brief      GPIO-based door/window state detection using magnetic reed switch.
+@details    Provides interface for MC-38 wired magnetic reed switch sensor.
+            Detects door/window open/close states using magnet and reed switch.
 
-Specifications:
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
+
+@hardware   MC-38 Wired Door Window Sensor (Reed Switch)
+@interface  GPIO23 (BCM) / Pin 16
+@type       Normally Closed (NC) Reed Switch
+
+@specifications
     - Model: MC-38 Wired Door Window Sensor
     - Type: Reed Switch (Normally Closed - NC)
     - Operation: Magnet near = CLOSED, Magnet away = OPEN
@@ -13,17 +31,26 @@ Specifications:
     - No polarity - either wire to GPIO or GND
     - Safe for GPIO - no voltage output
 
-Wiring to Raspberry Pi 5 (4GB):
-    Wire 1 (White) -> Pin 16 (GPIO23)
-    Wire 2 (White) -> Pin 6 (GND)
+@wiring
+    - Wire 1 (White) -> Pin 16 (GPIO23)
+    - Wire 2 (White) -> Pin 6 (GND)
+    - No polarity required - wires are interchangeable
 
-    No polarity required - wires are interchangeable.
-
-Logic (NC type with internal pull-up):
+@logic (NC type with internal pull-up)
     - Door CLOSED (magnet near): Switch CLOSED -> GPIO reads LOW (0)
     - Door OPENED (magnet away): Switch OPEN   -> GPIO reads HIGH (1)
 
-Note: GPIO17 = PIR, GPIO22 = Sound, GPIO27 = Vibration. Door uses GPIO23.
+@note GPIO17 = PIR, GPIO22 = Sound, GPIO27 = Vibration. Door uses GPIO23.
+
+@dependencies
+    - RPi.GPIO >= 0.7.0
+
+@usage
+    >>> from src.sensors.door import DoorSensor
+    >>> sensor = DoorSensor(gpio_pin=23)
+    >>> sensor.initialize()
+    >>> if sensor.is_door_open():
+    ...     print("Door is open!")
 """
 from dataclasses import dataclass, field
 from datetime import datetime

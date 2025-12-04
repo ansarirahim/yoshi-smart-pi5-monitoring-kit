@@ -1,13 +1,27 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Configuration loader utility.
 
-Handles loading and managing configuration from YAML files, JSON secrets,
-and environment variables with type-safe access.
+@file       config_loader.py
+@brief      Handles loading and managing configuration files.
+@details    Loads configuration from YAML files, JSON secrets,
+            and environment variables with type-safe access.
 
-Author: A.R. Ansari
-Email: ansarirahim1@gmail.com
-LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
-Project: Raspberry Pi Smart Monitoring Kit
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
+
+@dependencies
+    - pyyaml >= 6.0
+    - python-dotenv >= 1.0.0
 """
 
 import yaml

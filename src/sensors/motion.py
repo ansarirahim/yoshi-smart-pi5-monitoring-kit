@@ -1,13 +1,43 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 PIR Motion Sensor Module (HC-SR501).
 
-GPIO-based motion detection using Passive Infrared (PIR) sensor.
-Supports both polling and interrupt-driven detection.
+@file       motion.py
+@brief      GPIO-based motion detection using Passive Infrared (PIR) sensor.
+@details    Provides interface for HC-SR501 PIR sensor with support for
+            both polling and interrupt-driven detection modes. Includes
+            event history tracking and configurable callbacks.
 
-Author: A.R. Ansari
-Email: ansarirahim1@gmail.com
-LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
-Project: Raspberry Pi Smart Monitoring Kit
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
+
+@hardware   HC-SR501 PIR Motion Sensor (HW-416-B)
+@interface  GPIO17 (BCM) / Pin 11
+@voltage    3.3V DC (NOT 5V - will damage GPIO!)
+
+@wiring
+    - VCC  [+] Orange -> Pin 1 (3.3V)
+    - OUT  [S] Brown  -> Pin 11 (GPIO17)
+    - GND  [-] Black  -> Pin 6 (GND)
+
+@dependencies
+    - RPi.GPIO >= 0.7.0
+
+@usage
+    >>> from src.sensors.motion import MotionSensor
+    >>> sensor = MotionSensor(gpio_pin=17)
+    >>> sensor.initialize()
+    >>> if sensor.is_motion_detected():
+    ...     print("Motion detected!")
 """
 
 import time

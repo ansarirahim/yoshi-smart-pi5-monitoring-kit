@@ -1,13 +1,26 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Event Logging Module.
 
-Logs motion detection events with timestamps, snapshots, and metadata
-for analysis and notification purposes.
+@file       event_logger.py
+@brief      Logs motion detection events with metadata.
+@details    Maintains event logs with timestamps, snapshots, and metadata
+            for analysis and notification purposes.
 
-Author: A.R. Ansari
-Email: ansarirahim1@gmail.com
-LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
-Project: Raspberry Pi Smart Monitoring Kit
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
+
+@dependencies
+    - opencv-python >= 4.5.0
 """
 
 import os

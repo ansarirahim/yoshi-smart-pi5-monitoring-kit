@@ -1,13 +1,26 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Motion Detection Module.
 
-Detects motion in video streams using background subtraction
-and contour analysis with false positive reduction.
+@file       motion_detector.py
+@brief      Detects motion in video streams.
+@details    Uses background subtraction and contour analysis
+            with false positive reduction for reliable detection.
 
-Author: A.R. Ansari
-Email: ansarirahim1@gmail.com
-LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
-Project: Raspberry Pi Smart Monitoring Kit
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
+
+@dependencies
+    - opencv-python >= 4.5.0
 """
 
 import cv2

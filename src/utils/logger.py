@@ -1,12 +1,26 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Logging utility for Raspberry Pi Smart Monitoring Kit.
 
-Provides centralized logging with file rotation and colored console output.
+@file       logger.py
+@brief      Centralized logging with file rotation and colored output.
+@details    Provides configurable logging with rotating file handlers
+            and colored console output for easy debugging.
 
-Author: A.R. Ansari
-Email: ansarirahim1@gmail.com
-LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
-Project: Raspberry Pi Smart Monitoring Kit
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
+
+@dependencies
+    - colorlog >= 6.0.0
 """
 
 import logging

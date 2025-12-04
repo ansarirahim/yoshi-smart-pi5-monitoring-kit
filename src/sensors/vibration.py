@@ -1,32 +1,56 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 801S Vibration Shock Sensor Module for Raspberry Pi.
 
-This module provides an interface for the 801S vibration/shock sensor
-with LM393 comparator IC. The sensor detects vibration and outputs
-a digital HIGH signal when threshold is exceeded.
+@file       vibration.py
+@brief      GPIO-based vibration detection using 801S shock sensor.
+@details    Provides interface for 801S vibration sensor with LM393
+            comparator IC. Detects vibration/shock and outputs digital
+            HIGH signal when threshold is exceeded.
 
-Specifications:
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
+
+@hardware   801S Vibration Shock Sensor with LM393 Comparator
+@interface  GPIO27 (BCM) / Pin 13
+@voltage    3.3V DC (NOT 5V!)
+@durability 60 million shocks (gold-plated contacts)
+
+@specifications
     - Model: 801S Vibration Shock Sensor
     - Operating Voltage: 3.3V - 5V DC (Use 3.3V for Raspberry Pi!)
     - Output Type: Digital (D0) - HIGH when vibration detected
     - Sensitivity: Adjustable via onboard potentiometer
-    - Durability: 60 million shocks (gold-plated contacts)
     - Detection: Omnidirectional (no specific direction)
     - Comparator: LM393 IC
 
-Wiring to Raspberry Pi 5 (4GB) with polarity:
-    [+] VCC (Power)  -> Orange wire -> Pin 1 (3.3V) !! NOT 5V !!
-    [S] D0  (Signal) -> Gray wire   -> Pin 13 (GPIO27)
-    [-] GND (Ground) -> Black wire  -> Pin 6 (GND)
+@wiring
+    - VCC  [+] Orange -> Pin 1 (3.3V) !! NOT 5V !!
+    - D0   [S] Gray   -> Pin 13 (GPIO27)
+    - GND  [-] Black  -> Pin 6 (GND)
 
-Note: GPIO17 is reserved for PIR Motion Sensor. Use GPIO27 for vibration.
-
-!! WARNING: Use 3.3V for VCC to ensure safe GPIO voltage levels.
-
-Behavior:
+@behavior
     - No vibration: Output LOW, LED ON
     - Vibration detected: Output HIGH, LED OFF
+
+@dependencies
+    - RPi.GPIO >= 0.7.0
+
+@usage
+    >>> from src.sensors.vibration import VibrationSensor
+    >>> sensor = VibrationSensor(gpio_pin=27)
+    >>> sensor.initialize()
+    >>> if sensor.is_vibration_detected():
+    ...     print("Vibration detected!")
 """
 from dataclasses import dataclass, field
 from datetime import datetime

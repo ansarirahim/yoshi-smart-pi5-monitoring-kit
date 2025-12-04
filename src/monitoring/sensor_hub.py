@@ -1,22 +1,32 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 Sensor Hub - Unified Sensor Manager for Raspberry Pi Smart Monitoring Kit.
 
-Manages all connected sensors and provides a unified interface for:
-- Reading sensor states
-- Monitoring for events
-- Coordinating sensor data
+@file       sensor_hub.py
+@brief      Unified interface for managing all connected sensors.
+@details    Manages all connected sensors and provides unified interface for:
+            - Reading sensor states
+            - Monitoring for events
+            - Coordinating sensor data
 
-Sensors Supported:
-- PIR Motion Sensor (HC-SR501) - GPIO17
-- Sound Sensor (LM393) - GPIO22
-- Door Sensor (MC-38) - GPIO23
-- Vibration Sensor (801S) - GPIO27
-- Temperature Sensor (XY-MD02) - USB-RS485
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
 
-Author: A.R. Ansari
-Project: Raspberry Pi Smart Monitoring Kit
-Client: Yoshinori Ueda
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
+
+@sensors
+    - PIR Motion Sensor (HC-SR501) - GPIO17
+    - Sound Sensor (LM393) - GPIO22
+    - Door Sensor (MC-38) - GPIO23
+    - Vibration Sensor (801S) - GPIO27
+    - Temperature Sensor (XY-MD02) - USB-RS485
 """
 
 import threading

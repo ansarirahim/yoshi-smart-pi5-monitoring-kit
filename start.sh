@@ -1,13 +1,27 @@
 #!/bin/bash
-#
+# =============================================================================
 # Raspberry Pi Smart Monitoring Kit - Startup Script
-# Client: Yoshinori Ueda
+# =============================================================================
+#
+# @file       start.sh
+# @brief      Main startup script for the monitoring system.
+#
+# @author     A.R. Ansari
+# @email      ansarirahim1@gmail.com
+# @phone      +91 9024304881
+# @linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+#
+# @project    Raspberry Pi Smart Monitoring Kit
+# @client     Yoshinori Ueda
+# @version    1.0.0
+# @date       2024-12-04
+# @copyright  (c) 2024 A.R. Ansari. All rights reserved.
 #
 # Usage:
 #   ./start.sh          - Start monitoring system
 #   ./start.sh --test   - Run sensor tests
 #   ./start.sh --status - Check system status
-#
+# =============================================================================
 
 set -e
 

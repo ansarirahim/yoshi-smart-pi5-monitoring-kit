@@ -1,12 +1,30 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 """
 LM393 Sound Sensor Module for Raspberry Pi.
 
-This module provides an interface for the LM393-based sound detection sensor.
-The sensor detects ambient audio levels and outputs a digital LOW signal
-when sound exceeds the adjustable threshold.
+@file       sound.py
+@brief      GPIO-based sound detection using LM393 comparator sensor.
+@details    Provides interface for LM393-based sound detection sensor.
+            Detects ambient audio levels and outputs digital LOW signal
+            when sound exceeds adjustable threshold.
 
-Specifications:
+@author     A.R. Ansari
+@email      ansarirahim1@gmail.com
+@phone      +91 9024304881
+@linkedin   https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+
+@project    Raspberry Pi Smart Monitoring Kit
+@client     Yoshinori Ueda
+@version    1.0.0
+@date       2024-12-04
+@copyright  (c) 2024 A.R. Ansari. All rights reserved.
+
+@hardware   TekBud LM393 Sound Sensor Module
+@interface  GPIO22 (BCM) / Pin 15
+@voltage    3.3V DC (4V-6V supported, 3.3V works)
+
+@specifications
     - Model: TekBud LM393 Sound Sensor Module
     - Operating Voltage: 4V - 6V DC (3.3V also works)
     - Comparator IC: LM393
@@ -16,17 +34,27 @@ Specifications:
     - Sensitivity: Adjustable via potentiometer (anti-clockwise = reduce)
     - Orientation: Keep microphone facing DOWN (bottom side up)
 
-Wiring to Raspberry Pi 5 (4GB) with polarity:
-    [+] VCC (Power)  -> Orange wire -> Pin 1 (3.3V)
-    [-] GND (Ground) -> Black wire  -> Pin 6 (GND)
-    [S] D0  (Digital)-> White wire  -> Pin 15 (GPIO22)
-    [A] A0  (Analog) -> Not connected (RPi has no native ADC)
+@wiring
+    - VCC  [+] Orange -> Pin 1 (3.3V)
+    - GND  [-] Black  -> Pin 6 (GND)
+    - D0   [S] White  -> Pin 15 (GPIO22)
+    - A0   [A] N/C    -> Not connected (RPi has no native ADC)
 
-Note: GPIO17 = PIR, GPIO27 = Vibration. Sound uses GPIO22.
-
-Behavior:
+@behavior
     - No sound (quiet): D0 = HIGH, LED OFF
     - Sound detected:   D0 = LOW,  LED ON
+
+@note GPIO17 = PIR, GPIO27 = Vibration. Sound uses GPIO22.
+
+@dependencies
+    - RPi.GPIO >= 0.7.0
+
+@usage
+    >>> from src.sensors.sound import SoundSensor
+    >>> sensor = SoundSensor(gpio_pin=22)
+    >>> sensor.initialize()
+    >>> if sensor.is_sound_detected():
+    ...     print("Sound detected!")
 """
 from dataclasses import dataclass, field
 from datetime import datetime
