@@ -1,0 +1,161 @@
+MILESTONE 2 SUBMISSION - MOTION DETECTION ENGINE
+================================================
+
+Hi Yoshi,
+
+Milestone 2 (Motion Detection Engine) is now complete and pushed to GitHub.
+
+Repository: https://github.com/ansarirahim/raspberry-pi-smart-monitoring
+Branch: main
+Commit: 4fb9416
+
+
+WHAT WAS DELIVERED
+==================
+
+1. Background Subtraction Module (src/detection/background_subtractor.py)
+   - MOG2 algorithm (Mixture of Gaussians) - default
+   - KNN algorithm (K-Nearest Neighbors) - alternative
+   - Configurable history, variance threshold, shadow detection
+   - Automatic background model learning
+
+2. Motion Detection Module (src/detection/motion_detector.py)
+   - Contour-based motion detection
+   - Minimum area filtering (ignore small movements)
+   - False positive reduction:
+     * Gaussian blur for noise reduction
+     * Shadow removal
+     * Morphological operations
+   - Motion callback system
+   - Bounding box visualization
+   - Statistics tracking
+
+3. Event Logger Module (src/detection/event_logger.py)
+   - JSON-based event logging
+   - Automatic snapshot saving
+   - Event filtering by type and time range
+   - Persistent storage
+   - Maximum events limit
+
+4. Configuration File (config/detection_config.yaml)
+   - All parameters configurable
+   - Easy tuning for different scenarios
+
+5. Documentation (docs/MOTION_DETECTION.md)
+   - Complete usage guide
+   - Parameter descriptions
+   - Tuning guide for different scenarios
+   - Performance benchmarks
+   - Integration examples
+
+6. Demo Script (examples/motion_detection_demo.py)
+   - Works with webcam or video files
+   - Real-time visualization
+   - Statistics display
+   - Event logging option
+
+7. Comprehensive Test Suite (tests/test_detection/)
+   - 45 unit tests total
+   - 100% pass rate
+   - 91% code coverage
+   - Tests for all three modules
+
+
+TEST RESULTS
+============
+
+All 45 tests passing:
+- 12 tests for BackgroundSubtractor
+- 17 tests for MotionDetector
+- 16 tests for EventLogger
+
+Code coverage: 91% for detection module
+Linting: No errors (flake8)
+
+
+HOW TO TEST
+===========
+
+1. Pull latest code:
+   git pull origin main
+
+2. Install dependencies (if not already installed):
+   pip install -r requirements.txt
+
+3. Run unit tests:
+   pytest tests/test_detection/ -v
+
+4. Test with webcam:
+   python examples/motion_detection_demo.py
+
+5. Test with video file:
+   python examples/motion_detection_demo.py --video path/to/video.mp4
+
+
+FEATURES
+========
+
+- Detects moving objects in video stream
+- Filters out false positives (shadows, lighting changes, noise)
+- Configurable sensitivity
+- Logs events with timestamps
+- Saves snapshots of motion events
+- Real-time visualization with bounding boxes
+- Statistics tracking
+- Thread-safe and optimized for Raspberry Pi
+
+
+CONFIGURATION
+=============
+
+Edit config/detection_config.yaml to adjust:
+- min_area: Minimum object size (default: 500 pixels)
+- threshold: Sensitivity (lower = more sensitive, default: 25)
+- blur_size: Noise reduction (default: 21)
+- method: Algorithm (MOG2 or KNN)
+
+
+INTEGRATION WITH M1
+===================
+
+The motion detector integrates seamlessly with M1 RTSP stream handler:
+
+from src.rtsp import RTSPStreamHandler
+from src.detection import MotionDetector, EventLogger
+
+stream = RTSPStreamHandler(url="rtsp://camera_ip/stream")
+detector = MotionDetector()
+logger = EventLogger()
+
+stream.start()
+
+while True:
+    frame = stream.read_frame()
+    if frame is not None:
+        motion, boxes = detector.detect(frame)
+        if motion:
+            logger.log_event("motion", frame)
+
+
+NEXT MILESTONE
+==============
+
+M3: Fall Detection Algorithm
+- Will build on top of M2 motion detection
+- Motion triggers fall detection analysis
+- Uses pose estimation (MediaPipe)
+- Detects vertical-to-horizontal collapse patterns
+
+
+TIMELINE
+========
+
+M2 completed in 4 days (on schedule)
+Ready to proceed with M3
+
+
+Please review and approve M2 when ready.
+
+Thanks,
+A.R. Ansari
+
