@@ -6,9 +6,25 @@ import pytest
 import os
 import sys
 from pathlib import Path
+from unittest.mock import MagicMock
 
 # Add src to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
+
+# Mock RPi.GPIO for CI environment (non-Raspberry Pi)
+mock_gpio = MagicMock()
+mock_gpio.BCM = 11
+mock_gpio.IN = 1
+mock_gpio.OUT = 0
+mock_gpio.HIGH = 1
+mock_gpio.LOW = 0
+mock_gpio.PUD_UP = 22
+mock_gpio.PUD_DOWN = 21
+mock_gpio.RISING = 31
+mock_gpio.FALLING = 32
+mock_gpio.BOTH = 33
+sys.modules['RPi'] = MagicMock()
+sys.modules['RPi.GPIO'] = mock_gpio
 
 
 @pytest.fixture
