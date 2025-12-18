@@ -1,0 +1,56 @@
+# Voice Alert Configuration
+# Author: A.R. Ansari
+# Email: ansarirahim1@gmail.com
+# LinkedIn: https://www.linkedin.com/in/abdul-raheem-ansari-a6871320/
+# Project: Raspberry Pi Smart Monitoring Kit
+
+voice:
+  # Enable voice alerts
+  enabled: true
+
+  # Audio file path
+  # Default: assets/are_you_ok.wav
+  # Must be WAV format (PCM, 44100 Hz, 16-bit recommended)
+  audio_file: "assets/are_you_ok.wav"
+
+  # Playback volume (0.0 to 1.0)
+  # 0.0 = mute, 1.0 = maximum volume
+  # Recommended: 0.7 to 0.9 for indoor use
+  volume: 0.8
+
+  # Trigger Settings
+  # Enable voice alert on fall detection
+  trigger_on_fall: true
+
+  # Enable voice alert on motion detection
+  # Warning: May cause frequent alerts
+  trigger_on_motion: false
+
+  # Minimum interval between alerts (seconds)
+  # Prevents alert spam
+  # Set to 0 to disable rate limiting
+  min_alert_interval: 30
+
+  # Repeat Settings
+  # Number of times to repeat alert
+  # 1 = play once, 2 = play twice, etc.
+  repeat_count: 1
+
+  # Delay between repeats (seconds)
+  repeat_delay: 2.0
+
+  # Audio Device Settings (Linux/Raspberry Pi)
+  # Leave empty for default audio device
+  # Example: "hw:0,0" for specific ALSA device
+  audio_device: ""
+
+  # Buffer size for audio playback
+  # Larger buffer = less CPU usage but more latency
+  # Smaller buffer = more CPU usage but less latency
+  # Default: 4096 (good balance)
+  buffer_size: 4096
+
+  # Logging
+  log_playback: true
+  log_level: "INFO"
+

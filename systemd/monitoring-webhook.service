@@ -1,0 +1,18 @@
+[Unit]
+Description=Smart Monitoring Webhook Server
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/raspberry-pi-smart-monitoring
+Environment="PATH=/home/pi/raspberry-pi-smart-monitoring/venv/bin"
+Environment="PYTHONUNBUFFERED=1"
+EnvironmentFile=/home/pi/raspberry-pi-smart-monitoring/.env
+ExecStart=/home/pi/raspberry-pi-smart-monitoring/venv/bin/python -m src.line_api.webhook
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+
