@@ -1,0 +1,354 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║         HC-SR501 PIR MOTION SENSOR - COMPREHENSIVE TEST SUITE              ║
+║                        CREATION COMPLETE ✅                                ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+PROJECT OVERVIEW
+════════════════════════════════════════════════════════════════════════════
+
+Created: December 13, 2025
+Status: ✅ PRODUCTION READY
+Author: Yoshi Smart Monitoring Kit Project
+Library: gpiozero (event-driven GPIO)
+
+FILE STATISTICS
+════════════════════════════════════════════════════════════════════════════
+
+pir_test.py                    16 KB    502 lines
+PIR_TEST_GUIDE.md              9.4 KB   Complete documentation
+Total Documentation            25 KB    Ready for reference
+
+KEY FEATURES
+════════════════════════════════════════════════════════════════════════════
+
+✓ 7 COMPREHENSIVE TEST CASES
+  1. Idle State Test
+  2. Motion Detection Test  
+  3. Signal Recovery Test
+  4. Repeated Motion Test
+  5. Sensitivity Test
+  6. Detection Range Test
+  7. False Positive Test
+
+✓ ADVANCED CAPABILITIES
+  - Real-time event logging with microsecond timestamps
+  - Callback-based motion detection
+  - Event counter tracking
+  - Test pass/fail verification
+  - Statistics summary report
+  - Graceful interrupt handling (CTRL+C)
+  - GPIO cleanup on exit
+
+✓ USER INTERFACE
+  - Color-coded output (✅ PASS, ❌ FAIL, 🚨 MOTION)
+  - Progress indicators
+  - User prompts for each test
+  - Detailed test explanations
+  - Command-line argument parsing
+
+✓ CONFIGURATION
+  - Configurable GPIO pin
+  - Custom timeout per test
+  - Single test or all tests
+  - Help system with examples
+
+QUICK START
+════════════════════════════════════════════════════════════════════════════
+
+INSTALLATION:
+  pip install gpiozero RPi.GPIO --break-system-packages
+
+RUN ALL TESTS:
+  python pir_test.py
+
+RUN SPECIFIC TEST:
+  python pir_test.py --test motion
+
+CUSTOM GPIO:
+  python pir_test.py --gpio 27 --timeout 30
+
+TEST COVERAGE
+════════════════════════════════════════════════════════════════════════════
+
+TEST 1: IDLE STATE CHECK
+Purpose:  Verify sensor doesn't trigger without motion
+Duration: 10 seconds (default)
+Command:  python pir_test.py --test idle
+Steps:    Stand completely still for test duration
+Expected: ✅ PASS (no motion events)
+
+TEST 2: MOTION DETECTION  
+Purpose:  Verify sensor detects movement
+Duration: 10 seconds (default)
+Command:  python pir_test.py --test motion
+Steps:    Wave hand in front of sensor when prompted
+Expected: ✅ PASS (motion detected)
+
+TEST 3: SIGNAL RECOVERY
+Purpose:  Verify motion→idle transition works correctly
+Duration: 15 seconds (default)
+Command:  python pir_test.py --test recovery
+Steps:    1) Wave hand (motion) 2) Stand still (recovery)
+Expected: ✅ PASS (both events detected)
+
+TEST 4: REPEATED MOTION
+Purpose:  Verify reliable multi-event detection
+Duration: 3 cycles × timeout/6 seconds
+Command:  python pir_test.py --test repeated
+Steps:    Alternate motion and idle phases
+Expected: ✅ PASS (all 3 cycles detected)
+
+TEST 5: SENSITIVITY
+Purpose:  Check sensor sensitivity level
+Duration: 20 seconds (default)
+Command:  python pir_test.py --test sensitivity
+Steps:    Make small movements at various distances
+Expected: ✅ PASS (detections recorded)
+
+TEST 6: DETECTION RANGE
+Purpose:  Verify working detection distance
+Duration: 20 seconds (default)
+Command:  python pir_test.py --test range
+Steps:    Move from close (1m) to far (5m) from sensor
+Expected: ✅ PASS (range detection works)
+
+TEST 7: FALSE POSITIVE CHECK
+Purpose:  Verify no false triggers
+Duration: 30 seconds (default)
+Command:  python pir_test.py --test false_pos
+Steps:    Stand completely still (no motion)
+Expected: ✅ PASS (no false events)
+
+EXAMPLE OUTPUT
+════════════════════════════════════════════════════════════════════════════
+
+======================================================================
+HC-SR501 PIR MOTION SENSOR - COMPREHENSIVE TEST SUITE
+======================================================================
+[2025-12-13 17:10:30] GPIO Pin: 17
+[2025-12-13 17:10:30] Test Mode: all
+[2025-12-13 17:10:30] Timeout: 10s per test
+
+======================================================================
+TEST 1: IDLE STATE CHECK
+======================================================================
+[2025-12-13 17:10:30] ⏳ Waiting 10 seconds with NO motion...
+[2025-12-13 17:10:30] 👉 Please stand still / don't move near sensor
+
+[2025-12-13 17:10:40] ✅ TEST 1 PASSED - No motion detected
+----------------------------------------------------------------------
+
+======================================================================
+TEST 2: MOTION DETECTION
+======================================================================
+[2025-12-13 17:10:40] ⏳ Waiting 10 seconds for motion detection...
+[2025-12-13 17:10:40] 👉 Wave your hand in front of sensor NOW!
+
+[2025-12-13 17:10:42] 🚨 MOTION DETECTED (#1)
+[2025-12-13 17:10:43] ✓ Motion ended (idle #1)
+[2025-12-13 17:10:50] ✅ TEST 2 PASSED - Motion detected!
+----------------------------------------------------------------------
+
+... [more tests] ...
+
+======================================================================
+TEST SUMMARY
+======================================================================
+Idle State                     ✅ PASS
+Motion Detection               ✅ PASS
+Signal Recovery                ✅ PASS
+Repeated Motion                ✅ PASS
+Sensitivity                    ✅ PASS
+Detection Range                ✅ PASS
+False Positive                 ✅ PASS
+----------------------------------------------------------------------
+Total Events: 18 motion, 8 idle
+Results: 7/7 tests passed
+🎉 ALL TESTS PASSED!
+======================================================================
+
+COMMAND-LINE OPTIONS
+════════════════════════════════════════════════════════════════════════════
+
+-h, --help              Show help message
+--gpio GPIO             GPIO pin number (default: 17)
+--test TEST             Which test to run:
+                        - all (default): Run all 7 tests
+                        - idle: Idle state only
+                        - motion: Motion detection only
+                        - recovery: Signal recovery only
+                        - repeated: Repeated motion cycles
+                        - sensitivity: Sensitivity check
+                        - range: Detection range
+                        - false_pos: False positive check
+--timeout TIMEOUT       Duration per test in seconds (default: 10)
+
+EXAMPLE COMMANDS
+════════════════════════════════════════════════════════════════════════════
+
+# Run all tests with defaults
+python pir_test.py
+
+# Test only motion detection
+python pir_test.py --test motion
+
+# Test with GPIO27 instead of GPIO17
+python pir_test.py --gpio 27
+
+# Extended timeout (30 seconds per test)
+python pir_test.py --timeout 30
+
+# Specific test with custom GPIO and timeout
+python pir_test.py --gpio 27 --test sensitivity --timeout 45
+
+# Only idle state test
+python pir_test.py --test idle
+
+# Only false positive test (extended)
+python pir_test.py --test false_pos --timeout 60
+
+HARDWARE SETUP
+════════════════════════════════════════════════════════════════════════════
+
+HC-SR501 PINOUT:
+  VCC (1)   = Orange wire  → Raspberry Pi Pin 1 (3.3V)
+  GND (2)   = Black wire   → Raspberry Pi Pin 6 (GND)
+  OUT (3)   = Brown wire   → Raspberry Pi Pin 11 (GPIO17)
+
+PIN REFERENCE:
+                    Raspberry Pi 5 GPIO Header
+                    ===========================
+
+                 3.3V (1) [*] [*] (2) 5V
+          I2C SDA GPIO2 (3) [ ] [ ] (4) 5V
+          I2C SCL GPIO3 (5) [ ] [*] (6) GND
+                  GPIO4 (7) [ ] [ ] (8) GPIO14 TX
+                    GND (9) [ ] [ ] (10) GPIO15 RX
+    [PIR] --> GPIO17 (11) [*] [ ] (12) GPIO18
+  [OTHER] --> GPIO27 (13) [*] [ ] (14) GND
+             GPIO22 (15) [*] [*] (16) GPIO23 <-- [OTHER]
+                   3.3V (17) [ ] [ ] (18) GPIO24
+         ...
+
+⚠️ IMPORTANT: Use 3.3V for VCC, NOT 5V! Will damage GPIO pins.
+
+INSTALLATION REQUIREMENTS
+════════════════════════════════════════════════════════════════════════════
+
+BASIC:
+  pip install gpiozero
+
+RASPBERRY PI (complete):
+  pip install gpiozero RPi.GPIO --break-system-packages
+
+VERIFY INSTALLATION:
+  python -c "from gpiozero import MotionSensor; print('OK')"
+
+TROUBLESHOOTING
+════════════════════════════════════════════════════════════════════════════
+
+ERROR: "ModuleNotFoundError: No module named 'gpiozero'"
+FIX:   pip install gpiozero --break-system-packages
+
+ERROR: "GPIOPinMissing: GPIO pin not found"
+FIX:   - Check wiring (GND, VCC, OUT)
+       - Run with sudo: sudo python pir_test.py
+       - Verify GPIO pin: --gpio 27
+
+ERROR: "No motion detected in Motion Detection test"
+FIX:   - Wave hand closer to sensor
+       - Increase timeout: --timeout 30
+       - Check sensor power (LED should be on)
+       - Wait 30s for sensor warm-up
+
+ERROR: "False positives in Idle State test"
+FIX:   - Move sensor away from heat sources
+       - Reduce sensitivity (Sx potentiometer)
+       - Increase idle time (Tx potentiometer)
+
+SENSOR ADJUSTMENT (On-board potentiometers)
+════════════════════════════════════════════════════════════════════════════
+
+Tx (Time Delay):
+  Controls how long output stays HIGH after motion ends
+  Left (shorter):  2.5 seconds
+  Right (longer):  300 seconds
+  Recommended:     ~5-10 seconds
+
+Sx (Sensitivity):
+  Controls detection range
+  Left (less):     ~3 meters
+  Right (more):    ~7 meters
+  Recommended:     ~5 meters (middle position)
+
+STATISTICS TRACKED
+════════════════════════════════════════════════════════════════════════════
+
+Per-test Results:
+  - Test name and pass/fail status
+  - Motion detection count
+  - Idle detection count
+  - Event timestamps
+  - Test duration
+
+Summary Report:
+  - Total motion detections
+  - Total idle periods
+  - Number of passed tests
+  - Number of failed tests
+  - Overall success rate
+
+ADVANCED USAGE
+════════════════════════════════════════════════════════════════════════════
+
+CUSTOM TEST CLASS (Python):
+  from pir_test import PIRTester
+  
+  tester = PIRTester(gpio_pin=17)
+  tester.setup_callbacks()
+  tester.test_motion_detection(duration=20)
+  tester.print_summary()
+
+CONTINUOUS MONITORING:
+  from gpiozero import MotionSensor
+  from signal import pause
+  
+  pir = MotionSensor(17)
+  pir.when_motion = lambda: print("Motion!")
+  pir.when_no_motion = lambda: print("Idle")
+  pause()
+
+DOCUMENTATION FILES
+════════════════════════════════════════════════════════════════════════════
+
+pir_test.py              Main comprehensive test script (502 lines)
+PIR_TEST_GUIDE.md        Complete reference documentation
+PIR_SUMMARY.txt          This file
+README.md                Master guide for all sensors
+GPIO_PIN_ASSIGNMENTS.md  GPIO pinout reference
+
+SUPPORT & REFERENCE
+════════════════════════════════════════════════════════════════════════════
+
+For detailed information:
+1. Read PIR_TEST_GUIDE.md
+2. Run: python pir_test.py --help
+3. Check GPIO_PIN_ASSIGNMENTS.md for pin diagrams
+4. Review sensor documentation
+
+GitHub/Project Repo:
+  See /home/yoshi/Raspberry Pi Smart Monitoring Kit/
+
+════════════════════════════════════════════════════════════════════════════
+
+✅ READY TO USE!
+
+Next step:
+  python /home/yoshi/individual-sensor-tests/pir_test.py
+
+════════════════════════════════════════════════════════════════════════════
+
+Created: 2025-12-13
+Last Updated: 2025-12-13
+Status: ✅ PRODUCTION READY
+

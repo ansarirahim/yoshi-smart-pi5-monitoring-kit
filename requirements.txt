@@ -1,0 +1,50 @@
+# Yoshi Smart Pi5 Monitoring Kit - Python Dependencies
+# Author: A.R. Ansari
+# Date: 2025-12-18
+
+# GPIO Control and Sensor Management
+gpiozero>=2.0.1
+RPi.GPIO>=0.7.1
+
+# Modbus RTU Communication (Temperature Sensor)
+minimalmodbus>=2.1.1
+pyserial>=3.5
+
+# Standard Libraries (usually pre-installed)
+# - threading
+# - datetime
+# - time
+# - signal
+# - sys
+# - argparse
+# - os
+# - collections
+
+# Installation Instructions:
+# -------------------------
+# On Raspberry Pi OS (Bookworm or later):
+#   pip install -r requirements.txt --break-system-packages
+#
+# On older Raspberry Pi OS versions:
+#   pip3 install -r requirements.txt
+#
+# With virtual environment (recommended for development):
+#   python -m venv venv
+#   source venv/bin/activate
+#   pip install -r requirements.txt
+
+# Platform Requirements:
+# ----------------------
+# - Raspberry Pi 5 (or compatible Raspberry Pi with 40-pin GPIO)
+# - Raspberry Pi OS (64-bit or 32-bit)
+# - Python 3.7 or higher
+# - GPIO access permissions (user in 'gpio' group)
+
+# Hardware Requirements:
+# ----------------------
+# - XY-MD02 Temperature & Humidity Sensor (RS485/Modbus)
+# - HC-SR501 PIR Motion Sensor
+# - 801S Vibration Sensor
+# - LM393 Sound Sensor Module
+# - MC-38 Magnetic Door Sensor
+# - USB to RS485 converter (for temperature sensor)

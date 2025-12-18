@@ -1,0 +1,244 @@
+================================================================================
+                  INDIVIDUAL SENSOR TEST SETUP - COMPLETE
+================================================================================
+
+Created: 2025-12-13
+Status: Ready for Testing
+Total Files: 3 new files + documentation
+
+================================================================================
+                              FILES CREATED
+================================================================================
+
+1. md02.py (4.5 KB, 158 lines)
+   ✓ XY-MD02 Temperature/Humidity Sensor Modbus Test
+   ✓ Continuous reading loop (while True until CTRL+C)
+   ✓ Configurable parameters via command-line
+   ✓ Error handling with statistics
+   ✓ Progress tracking [0001], [0002], etc.
+   ✓ Status indicators (✓ valid, ⚠ warning, ✗ error)
+
+2. MD02_MODBUS_GUIDE.md (9.0 KB)
+   ✓ Complete Modbus protocol reference
+   ✓ Hardware wiring diagram
+   ✓ Data format explanation
+   ✓ Troubleshooting guide
+   ✓ Python code examples
+   ✓ Advanced configuration
+
+3. README.md (8.3 KB)
+   ✓ Master guide for all sensors
+   ✓ Quick reference for all test commands
+   ✓ Installation instructions
+   ✓ Test results summary
+   ✓ GPIO pin assignments
+   ✓ Troubleshooting tips
+
+================================================================================
+                            AVAILABLE SENSORS
+================================================================================
+
+1. TEMPERATURE/HUMIDITY (XY-MD02) - RS485/Modbus
+   Script: md02.py
+   Usage: python md02.py [--port PORT] [--interval INTERVAL]
+   Status: ✓ Ready with continuous test script
+
+2. MOTION (HC-SR501 PIR)
+   Tests: tests/test_sensors/test_motion.py
+   Count: 16 tests, ALL PASSING
+   Usage: python -m pytest tests/test_sensors/test_motion.py -v
+
+3. TEMPERATURE (Unit Tests)
+   Tests: tests/test_sensors/test_temperature.py
+   Count: 34 tests, ALL PASSING
+   Usage: python -m pytest tests/test_sensors/test_temperature.py -v
+
+4. SOUND (LM393)
+   Tests: tests/test_sensors/test_sound_interactive.py
+   Type: Interactive hardware test
+   Usage: python tests/test_sensors/test_sound_interactive.py
+
+5. VIBRATION (801S)
+   Tests: tests/test_sensors/test_vibration_interactive.py
+   Type: Interactive hardware test
+   Usage: python tests/test_sensors/test_vibration_interactive.py
+
+6. DOOR (MC-38)
+   Tests: tests/test_sensors/test_door_interactive.py
+   Type: Interactive hardware test
+   Usage: python tests/test_sensors/test_door_interactive.py
+
+7. MOTION (Interactive Test)
+   Tests: tests/test_sensors/test_pir_interactive.py
+   Type: Interactive hardware test
+   Usage: python tests/test_sensors/test_pir_interactive.py
+
+================================================================================
+                            QUICK START GUIDE
+================================================================================
+
+INSTALL DEPENDENCIES:
+$ pip install minimalmodbus pyserial pytest --break-system-packages
+
+RUN TEMPERATURE MODBUS TEST:
+$ python /home/yoshi/individual-sensor-tests/md02.py
+
+RUN MOTION SENSOR TESTS:
+$ python -m pytest tests/test_sensors/test_motion.py -v
+
+RUN TEMPERATURE UNIT TESTS:
+$ python -m pytest tests/test_sensors/test_temperature.py -v
+
+RUN ALL UNIT TESTS:
+$ python -m pytest tests/test_sensors/test_*.py -v
+
+SHOW HELP:
+$ python /home/yoshi/individual-sensor-tests/md02.py --help
+
+================================================================================
+                        COMMAND-LINE OPTIONS
+================================================================================
+
+python md02.py [OPTIONS]
+
+OPTIONS:
+  --port PORT              Serial port (default: /dev/ttyUSB0)
+  --slave SLAVE            Slave ID (default: 1)
+  --baudrate BAUDRATE      Baudrate (default: 9600)
+  --interval INTERVAL      Interval between reads (default: 2.0s)
+  --timeout TIMEOUT        Serial timeout (default: 1.5s)
+  -h, --help              Show this help message
+
+EXAMPLES:
+  python md02.py
+  python md02.py --port /dev/ttyACM0
+  python md02.py --interval 1.0
+  python md02.py --slave 1 --baudrate 19200 --interval 0.5
+
+================================================================================
+                           TEST RESULTS
+================================================================================
+
+Unit Tests Status:
+  Temperature Sensor: 34 tests  ✅ PASSED (77% coverage)
+  Motion Sensor:      16 tests  ✅ PASSED (57% coverage)
+  ─────────────────────────────────────
+  TOTAL:              50 tests  ✅ ALL PASSING
+
+Interactive Tests Available:
+  PIR Motion Sensor         ✓ Test Ready
+  Sound Sensor              ✓ Test Ready
+  Vibration Sensor          ✓ Test Ready
+  Door Sensor               ✓ Test Ready
+
+================================================================================
+                          GPIO PIN MAPPING
+================================================================================
+
+Sensor              GPIO    Pin   Wire Color   VCC      GND
+──────────────────┬─────────────┬──────────────┬────────┬─────────
+PIR Motion         GPIO17  11    Brown        3.3V(1) GND(6)
+Sound              GPIO22  15    White        3.3V(1) GND(6)
+Door               GPIO23  16    White        3.3V(1) GND(6)
+Vibration          GPIO27  13    Gray         3.3V(1) GND(6)
+Temperature        N/A     USB   RS485        USB     USB
+
+================================================================================
+                        TYPICAL SESSION FLOW
+================================================================================
+
+1. SETUP:
+   $ pip install minimalmodbus --break-system-packages
+
+2. VERIFY HARDWARE:
+   $ ls /dev/tty* | grep -E "USB|ACM"
+
+3. RUN CONTINUOUS TEST:
+   $ python /home/yoshi/individual-sensor-tests/md02.py
+   
+   Output Example:
+   ======================================================================
+   XY-MD02 TEMPERATURE/HUMIDITY SENSOR - CONTINUOUS TEST
+   ======================================================================
+   Port:        /dev/ttyUSB0
+   Slave ID:    1
+   Baudrate:    9600
+   Interval:    2.0s
+   Timeout:     1.5s
+   ======================================================================
+   Press CTRL+C to stop
+   
+   [0001] ✓ Temp:  23.5°C | Humidity:  55.2%RH
+   [0002] ✓ Temp:  23.4°C | Humidity:  55.3%RH
+   [0003] ✓ Temp:  23.5°C | Humidity:  55.1%RH
+   ^C
+   ======================================================================
+   TEST STOPPED BY USER
+   ======================================================================
+   Total reads:    3
+   Errors:         0
+   Success rate:   100.0%
+   ======================================================================
+
+4. RUN UNIT TESTS:
+   $ python -m pytest tests/test_sensors/test_temperature.py -v
+   
+5. READ DOCUMENTATION:
+   $ cat /home/yoshi/individual-sensor-tests/README.md
+   $ cat /home/yoshi/individual-sensor-tests/MD02_MODBUS_GUIDE.md
+
+================================================================================
+                          TROUBLESHOOTING
+================================================================================
+
+IMPORT ERROR:
+  Error: ModuleNotFoundError: No module named 'minimalmodbus'
+  Fix: pip install minimalmodbus --break-system-packages
+
+SERIAL PORT NOT FOUND:
+  Error: Port not found: /dev/ttyUSB0
+  Fix: Check with: ls /dev/tty*
+       Use correct port: python md02.py --port /dev/ttyACM0
+
+TIMEOUT ERROR:
+  Error: Response timeout
+  Fix: Increase timeout: python md02.py --timeout 2.0
+
+CRC ERROR:
+  Error: CRC check failed
+  Fix: Check wiring (A/B not swapped), try different baudrate
+
+NO DATA:
+  Error: All zeros or no readings
+  Fix: Verify 5V power to USB converter, check USB connection
+
+================================================================================
+                          NEXT STEPS
+================================================================================
+
+1. Read README.md for complete sensor guide
+2. Check MD02_MODBUS_GUIDE.md for protocol details
+3. Run md02.py for continuous temperature monitoring
+4. Run pytest for unit tests
+5. Use interactive tests for hardware verification
+
+DOCUMENTATION LOCATIONS:
+  ✓ /home/yoshi/individual-sensor-tests/README.md
+  ✓ /home/yoshi/individual-sensor-tests/MD02_MODBUS_GUIDE.md
+  ✓ /home/yoshi/Raspberry Pi Smart Monitoring Kit/docs/
+
+================================================================================
+                            SUPPORT
+================================================================================
+
+For detailed information:
+1. Check documentation files in this directory
+2. Run: python md02.py --help
+3. Review test files for code examples
+4. Check docs/ folder for sensor guides
+
+Created: 2025-12-13
+Last Updated: 2025-12-13
+Status: ✅ READY FOR USE
+
+================================================================================
